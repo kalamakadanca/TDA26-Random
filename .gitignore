@@ -363,3 +363,63 @@ __pycache__/
 *.btm.cs
 *.odx.cs
 *.xsd.cs
+
+# Build results
+bin/
+obj/
+out/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.userprefs
+
+# Rider
+.idea/
+
+# Visual Studio Code
+.vscode/
+
+# NuGet
+*.nupkg
+*.snupkg
+*.nuspec
+*.nuget.props
+*.nuget.targets
+project.lock.json
+artifacts/
+
+# Backup and crash files
+*.bak
+*.backup
+*.tmp
+*.log
+
+# Test results
+TestResult*/
+*.trx
+*.coverage
+*.coveragexml
+
+# Generated files
+*.dll
+*.exe
+*.pdb
+*.cache
+*.dbmdl
+*.generated.cs
+*.AssemblyReference.cache
+*.nuget.g.props
+*.nuget.g.targets
+
+# Publish outputs
+publish/
+AppPackages/
+BundleArtifacts/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+desktop.ini
