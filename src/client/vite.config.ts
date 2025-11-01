@@ -6,7 +6,7 @@ import tailwindcss from '@tailwindcss/vite'
 export default defineConfig({
     plugins: [react(), tailwindcss(),],    
     build: {
-        outDir: "../TdA-26-Random.WebApi/wwwroot",
+        outDir: "build",
         emptyOutDir: true
     }
 })

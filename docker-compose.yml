@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  webapp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: tda26-random-webapp
+    ports:
+      - "5196:8080"
+      - "7001:8081"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://+:8080
+    restart: unless-stopped
+    networks:
+      - tda26-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/api/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Optional: Add database service if needed
+  # database:
+  #   image: mcr.microsoft.com/mssql/server:2022-latest
+  #   container_name: tda26-random-db
+  #   environment:
+  #     - ACCEPT_EULA=Y
+  #     - SA_PASSWORD=YourStrong@Passw0rd
+  #   ports:
+  #     - "1433:1433"
+  #   volumes:
+  #     - db-data:/var/opt/mssql
+  #   networks:
+  #     - tda26-network
+
+networks:
+  tda26-network:
+    driver: bridge
+
+# volumes:
+#   db-data:

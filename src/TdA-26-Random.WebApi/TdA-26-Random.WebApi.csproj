@@ -19,9 +19,4 @@
         <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="9.0.6"/>
     </ItemGroup>
 
-    <Target Name="BuildSpa" BeforeTargets="Build">
-        <Exec WorkingDirectory="$(SpaWorkingDirectory)" Command="npm install"/>
-        <Exec WorkingDirectory="$(SpaWorkingDirectory)" Command="$(SpaBuild)"/>
-    </Target>
-
 </Project>

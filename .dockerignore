@@ -1,0 +1,57 @@
+# Git
+.git
+.gitignore
+.gitattributes
+
+# IDE
+.vs/
+.vscode/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build results
+**/bin/
+**/obj/
+**/out/
+**/dist/
+**/build/
+
+# Node modules
+**/node_modules/
+**/npm-debug.log
+**/yarn-error.log
+
+# Frontend build artifacts
+src/client/.tmp/
+src/client/dist/
+src/TdA-26-Random.WebApi/wwwroot/
+
+# NuGet
+*.nupkg
+*.snupkg
+**/packages/
+
+# Test results
+**/.testcoverage/
+**/TestResults/
+**/*.trx
+
+# Logs
+**/logs/
+**/*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Documentation
+*.md
+LICENSE
+
+# Docker files (avoid recursion)
+Dockerfile*
+docker-compose*
+.dockerignore
