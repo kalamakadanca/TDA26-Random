@@ -1,15 +1,20 @@
 {
   "version": 2,
-  "dgSpecHash": "xwdDR3oWmc0=",
+  "dgSpecHash": "wwdLsTmUOdw=",
   "success": true,
-  "projectFilePath": "C:\\Users\\59259adamcik\\RiderProjects\\TDA26-Random\\src\\TdA-26-Random.Infrastructure\\TdA-26-Random.Infrastructure.csproj",
+  "projectFilePath": "C:\\Users\\jakub\\RiderProjects\\TDA26-Random\\src\\TdA-26-Random.Infrastructure\\TdA-26-Random.Infrastructure.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\59259adamcik\\.nuget\\packages\\microsoft.extensions.apidescription.server\\9.0.0\\microsoft.extensions.apidescription.server.9.0.0.nupkg.sha512",
-    "C:\\Users\\59259adamcik\\.nuget\\packages\\microsoft.openapi\\1.6.25\\microsoft.openapi.1.6.25.nupkg.sha512",
-    "C:\\Users\\59259adamcik\\.nuget\\packages\\swashbuckle.aspnetcore\\9.0.6\\swashbuckle.aspnetcore.9.0.6.nupkg.sha512",
-    "C:\\Users\\59259adamcik\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\9.0.6\\swashbuckle.aspnetcore.swagger.9.0.6.nupkg.sha512",
-    "C:\\Users\\59259adamcik\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\9.0.6\\swashbuckle.aspnetcore.swaggergen.9.0.6.nupkg.sha512",
-    "C:\\Users\\59259adamcik\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\9.0.6\\swashbuckle.aspnetcore.swaggerui.9.0.6.nupkg.sha512"
+    "C:\\Users\\jakub\\.nuget\\packages\\microsoft.aspnetcore.spaservices.extensions\\9.0.10\\microsoft.aspnetcore.spaservices.extensions.9.0.10.nupkg.sha512",
+    "C:\\Users\\jakub\\.nuget\\packages\\microsoft.extensions.apidescription.server\\9.0.0\\microsoft.extensions.apidescription.server.9.0.0.nupkg.sha512",
+    "C:\\Users\\jakub\\.nuget\\packages\\microsoft.extensions.fileproviders.abstractions\\9.0.10\\microsoft.extensions.fileproviders.abstractions.9.0.10.nupkg.sha512",
+    "C:\\Users\\jakub\\.nuget\\packages\\microsoft.extensions.fileproviders.physical\\9.0.10\\microsoft.extensions.fileproviders.physical.9.0.10.nupkg.sha512",
+    "C:\\Users\\jakub\\.nuget\\packages\\microsoft.extensions.filesystemglobbing\\9.0.10\\microsoft.extensions.filesystemglobbing.9.0.10.nupkg.sha512",
+    "C:\\Users\\jakub\\.nuget\\packages\\microsoft.extensions.primitives\\9.0.10\\microsoft.extensions.primitives.9.0.10.nupkg.sha512",
+    "C:\\Users\\jakub\\.nuget\\packages\\microsoft.openapi\\1.6.25\\microsoft.openapi.1.6.25.nupkg.sha512",
+    "C:\\Users\\jakub\\.nuget\\packages\\swashbuckle.aspnetcore\\9.0.6\\swashbuckle.aspnetcore.9.0.6.nupkg.sha512",
+    "C:\\Users\\jakub\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\9.0.6\\swashbuckle.aspnetcore.swagger.9.0.6.nupkg.sha512",
+    "C:\\Users\\jakub\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\9.0.6\\swashbuckle.aspnetcore.swaggergen.9.0.6.nupkg.sha512",
+    "C:\\Users\\jakub\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\9.0.6\\swashbuckle.aspnetcore.swaggerui.9.0.6.nupkg.sha512"
   ],
   "logs": []
 }

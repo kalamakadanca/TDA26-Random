@@ -1,5 +1,5 @@
 function NavBar() {
-    return <div>Toto je navbar</div>
+    return <div className="w">Toto je navbar</div>
 }
 
 export default NavBar;
