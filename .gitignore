@@ -1,6 +1,7 @@
 ﻿# Logs
 logs
 *.log
+.idea/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
@@ -340,8 +341,7 @@ paket-files/
 # FAKE - F# Make
 .fake/
 
-# JetBrains Rider
-.idea/
+
 *.sln.iml
 
 # CodeRush
