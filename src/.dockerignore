@@ -1,18 +1,15 @@
-# .NET build artifacts
 **/bin/
 **/obj/
 **/out/
 *.user
 *.suo
 
-# Node modules and build artifacts
 **/node_modules/
 **/dist/
 **/build/
 client/dist/
 client/node_modules/
 
-# IDE and OS files
 .vs/
 .vscode/
 .idea/
@@ -20,13 +17,10 @@ client/node_modules/
 .DS_Store
 Thumbs.db
 
-# Git
 .git/
 .gitignore
 
-# Docker
 **/.dockerignore
 
-# Documentation
 *.md
 
