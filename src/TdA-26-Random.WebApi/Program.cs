@@ -9,7 +9,6 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddCors(options =>
 {
-    // Development CORS policy
     options.AddPolicy("Development", policy =>
     {
         policy.WithOrigins("http://localhost:5173")
@@ -18,7 +17,6 @@ builder.Services.AddCors(options =>
             .AllowCredentials();
     });
 
-    // Production CORS policy
     options.AddPolicy("Production", policy =>
     {
         policy.AllowAnyOrigin()
@@ -45,7 +43,6 @@ app.Use(async (context, next) =>
     await next();
 });
 
-// HTTPS redirection (disabled in production container)
 if (!app.Environment.IsDevelopment())
 {
     app.UseHsts();
