@@ -4,7 +4,7 @@ import Courses from "./Pages/Courses.tsx";
 import NavBar from "./Components/NavBar.tsx";
 
 export default function App() {
-    return <div className="w-full h-full flex flex-col">
+    return <div className="w-screen h-screen flex flex-col">
         <Router>
             <div className="flex w-full">
                 <NavBar/>

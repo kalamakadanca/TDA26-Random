@@ -1,5 +1,9 @@
+import SideBar from "../Components/SideBar.tsx";
+
 function Courses() {
-    return <h3>Kurzy</h3>;
+    return <div className="w-full h-full flex">
+
+    </div>
 }
 
 export default Courses;

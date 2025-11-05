@@ -2,9 +2,6 @@
 
     <PropertyGroup>
         <TargetFramework>net9.0</TargetFramework>
-        <SpaRoot>../client</SpaRoot>
-        <SpaBuild>npm run build</SpaBuild>
-        <SpaWorkingDirectory>$(SpaRoot)</SpaWorkingDirectory>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <RootNamespace>TdA_26_Random.WebApi</RootNamespace>
@@ -18,10 +15,5 @@
         <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="9.0.6"/>
         <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="9.0.6"/>
     </ItemGroup>
-
-    <Target Name="BuildSpa" BeforeTargets="Build">
-        <Exec WorkingDirectory="$(SpaWorkingDirectory)" Command="npm install"/>
-        <Exec WorkingDirectory="$(SpaWorkingDirectory)" Command="$(SpaBuild)"/>
-    </Target>
 
 </Project>
