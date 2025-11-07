@@ -1,0 +1,10 @@
+# $schema: https://portalbush.tourde.cloud/static/schema.json
+
+dockerfilePath: src/TdA-26-Random.WebApi/Dockerfile
+exposedPort: 80
+environment:
+  ASPNETCORE_ENVIRONMENT: Production
+  ASPNETCORE_URLS: http://+:80
+  ConnectionStrings__IdentityConnection: Data Source=/app/data/identity.db
+volumes:
+  - /app/data
