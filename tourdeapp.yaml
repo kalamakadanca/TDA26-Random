@@ -1,35 +1,10 @@
 # $schema: https://portalbush.tourde.cloud/static/schema.json
 
-version: '3.8'
-
-services:
-  tda-random-app:
-    build:
-      context: ./src
-      dockerfile: TdA-26-Random.WebApi/Dockerfile
-    container_name: tda-random-app
-    restart: unless-stopped
-    ports:
-      - "8080:80"
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Production
-      - ASPNETCORE_URLS=http://+:80
-      - ConnectionStrings__IdentityConnection=Data Source=/app/data/identity.db
-    volumes:
-      - app-data:/app/data
-    healthcheck:
-      test: ["CMD-SHELL", "wget --no-verbose --tries=1 --spider http://localhost:80/ || exit 1"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-      start_period: 40s
-    networks:
-      - tda-network
-
+dockerfilePath: src/TdA-26-Random.WebApi/Dockerfile
+exposedPort: 80
+environment:
+  ASPNETCORE_ENVIRONMENT: Production
+  ASPNETCORE_URLS: http://+:80
+  ConnectionStrings__IdentityConnection: Data Source=/app/data/identity.db
 volumes:
-  app-data:
-    driver: local
-
-networks:
-  tda-network:
-    driver: bridge
+  - /app/data
