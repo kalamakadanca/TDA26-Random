@@ -11,9 +11,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<AuthDbContext>(options =>
+builder.Services.AddDbContext<IdentityDbContext>(options =>
 {
-    options.UseSqlServer();
+    options.UseSqlite(builder.Configuration.GetConnectionString("IdentityConnection"), b => b.MigrationsAssembly("TdA-26-Random.WebApi"));
     
 });
 
@@ -38,7 +38,7 @@ builder.Services.AddCors(options =>
 builder.Services.AddIdentity<User, IdentityRole>(options =>
 {
     
-}).AddEntityFrameworkStores<AuthDbContext>();
+}).AddEntityFrameworkStores<IdentityDbContext>();
 
 var app = builder.Build();
 
