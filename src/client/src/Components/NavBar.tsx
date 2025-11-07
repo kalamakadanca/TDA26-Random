@@ -7,7 +7,7 @@ function NavBar() {
         navigate("/");
     };
 
-    return <div className="w-full bg-blue-300 p-3 flex justify-between shadow items-center">
+    return <div className="w-full bg-blue-500 p-3 flex justify-between shadow items-center">
         <div onClick={navigateHome} className="cursor-pointer">
             <img className="w-64" src="/Logo/SVG/Think-different-Academy_LOGO_oficialni-bile.svg"/>
         </div>
