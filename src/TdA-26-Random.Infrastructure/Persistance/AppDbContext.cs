@@ -1,6 +1,8 @@
-﻿namespace TdA_26_Random.Infrastructure.Persistance;
+﻿using Microsoft.EntityFrameworkCore;
 
-public class AppDbContext
+namespace TdA_26_Random.Infrastructure.Persistance;
+
+public class AppDbContext : DbContext
 {
     
 }

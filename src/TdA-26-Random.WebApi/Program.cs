@@ -1,11 +1,21 @@
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using TdA_26_Random.Domain.Entities;
+using TdA_26_Random.Infrastructure.Persistance;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddDbContext<AuthDbContext>(options =>
+{
+    options.UseSqlServer();
+    
+});
 
 builder.Services.AddCors(options =>
 {
@@ -24,6 +34,11 @@ builder.Services.AddCors(options =>
             .AllowAnyMethod();
     });
 });
+
+builder.Services.AddIdentity<User, IdentityRole>(options =>
+{
+    
+}).AddEntityFrameworkStores<AuthDbContext>();
 
 var app = builder.Build();
 
