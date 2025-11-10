@@ -6,7 +6,7 @@ export default function Login() {
     const [password, setPassword] = useState("");
 
     const login = async () => {
-        const response = await axios.post('http://localhost:5196/api/auth/login', {
+        const response = await axios.post('http://localhost:5196/api/auth/login', { // URI se pak musí změnit
             email, password,
         }, {
             withCredentials: true

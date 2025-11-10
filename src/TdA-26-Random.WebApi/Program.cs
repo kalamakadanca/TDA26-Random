@@ -13,8 +13,8 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<IdentityDbContext>(options =>
 {
-    options.UseSqlite(builder.Configuration.GetConnectionString("IdentityConnection"), b => b.MigrationsAssembly("TdA-26-Random.WebApi"));
-    
+    options.UseSqlite(builder.Configuration.GetConnectionString("IdentityConnection"),
+        b => b.MigrationsAssembly("TdA-26-Random.WebApi"));
 });
 
 builder.Services.AddCors(options =>
@@ -25,20 +25,16 @@ builder.Services.AddCors(options =>
             .AllowAnyHeader()
             .AllowAnyMethod()
             .AllowCredentials();
-    });
 
-    options.AddPolicy("Production", policy =>
-    {
-        policy.AllowAnyOrigin()
-            .AllowAnyHeader()
-            .AllowAnyMethod();
+        options.AddPolicy("Production", policy =>
+        {
+            policy.AllowAnyOrigin()
+                .AllowAnyHeader()
+                .AllowAnyMethod();
+        });
     });
 });
-
-builder.Services.AddIdentity<User, IdentityRole>(options =>
-{
-    
-}).AddEntityFrameworkStores<IdentityDbContext>();
+builder.Services.AddIdentity<User, IdentityRole>(options => { }).AddEntityFrameworkStores<IdentityDbContext>();
 
 var app = builder.Build();
 

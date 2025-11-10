@@ -6,9 +6,9 @@ import Login from "./Pages/Login.tsx";
 import Register from "./Pages/Register.tsx";
 
 export default function App() {
-    return <div className="w-screen h-screen flex flex-col">
+    return <div className="w-screen h-screen items-center justify-center flex flex-col">
         <Router>
-            <div className="flex w-full">
+            <div className="flex w-full ">
                 <NavBar/>
             </div>
             <Routes>
