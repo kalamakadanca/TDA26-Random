@@ -14,19 +14,20 @@ function NavBar() {
 
     useEffect(() => {
         const me = async () => {
-            const result = await axios.get('http://localhost:5196/api/auth/me');
+            const res = await axios.get('http://localhost:5196/api/auth/me');
+            setIsAuthenticated(res.status === 200);
 
-            if (result.status == 200) {
-                setIsAuthenticated(true);
-                return;
-            }
-
-            setIsAuthenticated(false);
         };
+
+        me();
     }, []);
 
     const logout = async () => {
+        const res = await axios.post("http://localhost:5196/api/auth/me");
 
+        if (res.status === 200) {
+            window.location.reload();
+        }
     };
 
     return <div
@@ -39,9 +40,16 @@ function NavBar() {
             <SearchBar/>
         </div>
 
-        <div>
+        <div className="">
+            {isAuthenticated ?
+                <button className="p-3 bg-blue-50 rounded" onClick={() => navigate("/login")}>Přihlásit se</button> :
+                <div className="w-full h-full flex flex-row gap-5 justify-center items-center">
+                    <button className="p-3 bg-blue-50 rounded" onClick={logout}>Odhlásit se</button>
+                    <div className="bg-blue-50 p-1 rounded-full overflow-hidden cursor-pointer">
+                        <img src='/user-icon.png' className=" size-10"/>
 
-            {isAuthenticated ? <button className="p-3 bg-blue-50 rounded" onClick={() => navigate("/login")}>Přihlásit se</button> : <button className="p-3 bg-blue-50 rounded ">Odhlásit se</button>}
+                    </div>
+                </div>}
         </div>
     </div>;
 }

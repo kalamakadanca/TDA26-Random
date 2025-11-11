@@ -36,6 +36,12 @@ builder.Services.AddCors(options =>
 });
 builder.Services.AddIdentity<User, IdentityRole>(options => { }).AddEntityFrameworkStores<IdentityDbContext>();
 
+builder.Services.AddSpaStaticFiles(configuration =>
+{
+    configuration.RootPath = "wwwroot";
+});
+
+
 var app = builder.Build();
 
 app.Use(async (context, next) =>
