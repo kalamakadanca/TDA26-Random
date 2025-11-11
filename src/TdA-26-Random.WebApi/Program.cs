@@ -11,6 +11,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddAuthentication();
+builder.Services.AddAuthorization();
+
+builder.Services.AddHttpContextAccessor();
+
 builder.Services.AddDbContext<IdentityDbContext>(options =>
 {
     options.UseSqlite(builder.Configuration.GetConnectionString("IdentityConnection"),
@@ -36,10 +41,17 @@ builder.Services.AddCors(options =>
 });
 builder.Services.AddIdentity<User, IdentityRole>(options => { }).AddEntityFrameworkStores<IdentityDbContext>();
 
-builder.Services.AddSpaStaticFiles(configuration =>
+builder.Services.ConfigureApplicationCookie(options =>
 {
-    configuration.RootPath = "wwwroot";
+    options.Events.OnRedirectToLogin = context =>
+    {
+        context.Response.StatusCode = 401;
+        return Task.CompletedTask;
+    };
 });
+
+
+builder.Services.AddSpaStaticFiles(configuration => { configuration.RootPath = "wwwroot"; });
 
 
 var app = builder.Build();
@@ -74,9 +86,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseRouting();
 
 app.UseCors(app.Environment.IsDevelopment() ? "Development" : "Production");
+app.UseRouting();
+app.UseAuthentication();
+app.UseAuthorization();
+
 
 app.MapControllers();
 app.MapFallbackToFile("index.html");

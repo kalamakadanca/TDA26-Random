@@ -11,6 +11,8 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.11" />
+        <PackageReference Include="Microsoft.AspNetCore.Components.Authorization" Version="9.0.11" />
         <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="9.0.10"/>
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.8"/>
         <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="9.0.10"/>
@@ -43,9 +45,11 @@
     </Target>
 
     <Target Name="CopySpaFiles" AfterTargets="BuildSpa">
-    <ItemGroup>
-        <SpaFiles Include="$(SpaRoot)/dist/**/*"/>
-    </ItemGroup>
-    <Copy SourceFiles="@(SpaFiles)" DestinationFolder="$(OutDir)wwwroot/%(RecursiveDir)" SkipUnchangedFiles="true"/>
-</Target>
+        <ItemGroup>
+            <SpaFiles Include="$(SpaRoot)/dist/**/*"/>
+        </ItemGroup>
+        <Copy SourceFiles="@(SpaFiles)"
+              DestinationFolder="$(ProjectDir)wwwroot/%(RecursiveDir)"
+              SkipUnchangedFiles="true"/>
+    </Target>
 </Project>

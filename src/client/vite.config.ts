@@ -8,19 +8,6 @@ export default defineConfig({
     build: {
         outDir: "dist",
         emptyOutDir: true,
-        rollupOptions: {
-            output: {
-              assetFileNames: 'assets/[name]-[hash][extname]',
-              chunkFileNames: 'assets/[name]-[hash].js',
-              entryFileNames: 'assets/[name]-[hash].js',
-              manualChunks: {
-                vendor: ['react', 'react-dom'],
-              },
-            },
-          },
-        
-        minify: 'esbuild',
-        target: 'esnext',
     },
     server: {
         port: 5173,

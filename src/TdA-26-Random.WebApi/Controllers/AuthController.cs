@@ -8,7 +8,7 @@ namespace TdA_26_Random.WebApi.Controllers;
 
 [ApiController]
 [Route("/api/auth/")]
-public class AuthController(SignInManager<User> signInManager, UserManager<User> userManager) : ControllerBase
+public class AuthController(SignInManager<User> signInManager, UserManager<User> userManager, AuthenticationStateProvider authenticationStateProvider) : ControllerBase
 {
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] LoginRequest request)
@@ -52,8 +52,16 @@ public class AuthController(SignInManager<User> signInManager, UserManager<User>
     }
     
     [HttpGet("me")]
-    public async Task<IActionResult> Me() // Check if is authorized
+    public async Task<IActionResult> Me()
     {
-        return NoContent();
+        var authState = await authenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+
+        if (user.Identity.IsAuthenticated)
+        {
+            return Ok("User is authenticated");
+        }
+
+        return Unauthorized();
     }
 }
