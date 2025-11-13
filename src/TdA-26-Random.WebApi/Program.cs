@@ -11,9 +11,15 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<IdentityDbContext>(options =>
+builder.Services.AddDbContext<IdentityDbContext>(options => // Context for authentication
 {
     options.UseSqlite(builder.Configuration.GetConnectionString("IdentityConnection"),
+        b => b.MigrationsAssembly("TdA-26-Random.WebApi"));
+});
+
+builder.Services.AddDbContext<AppDbContext>(options =>
+{
+    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"),
         b => b.MigrationsAssembly("TdA-26-Random.WebApi"));
 });
 
@@ -36,10 +42,7 @@ builder.Services.AddCors(options =>
 });
 builder.Services.AddIdentity<User, IdentityRole>(options => { }).AddEntityFrameworkStores<IdentityDbContext>();
 
-builder.Services.AddSpaStaticFiles(configuration =>
-{
-    configuration.RootPath = "wwwroot";
-});
+builder.Services.AddSpaStaticFiles(configuration => { configuration.RootPath = "wwwroot"; });
 
 
 var app = builder.Build();
