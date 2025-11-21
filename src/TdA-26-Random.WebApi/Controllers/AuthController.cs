@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Components.Authorization;
+﻿using System.Security.Claims;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
@@ -54,6 +55,14 @@ public class AuthController(SignInManager<User> signInManager, UserManager<User>
     [HttpGet("me")]
     public async Task<IActionResult> Me() // Check if is authorized
     {
-        return NoContent();
+        if (User.Identity?.IsAuthenticated == true)
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var email = User.FindFirst(ClaimTypes.Email)?.Value;
+            return Ok(new {UserId = userId, Email = email});
+        }
+
+        return Unauthorized();
+
     }
 }

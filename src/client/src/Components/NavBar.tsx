@@ -16,7 +16,7 @@ function NavBar() {
         const me = async () => {
             const res = await axios.get('http://localhost:5196/api/auth/me');
             setIsAuthenticated(res.status === 200);
-
+        
         };
 
         me();

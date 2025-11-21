@@ -42,6 +42,11 @@ builder.Services.AddCors(options =>
 });
 builder.Services.AddIdentity<User, IdentityRole>(options => { }).AddEntityFrameworkStores<IdentityDbContext>();
 
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.Cookie.Name = "AuthCookie";
+});
+
 builder.Services.AddSpaStaticFiles(configuration => { configuration.RootPath = "wwwroot"; });
 
 
