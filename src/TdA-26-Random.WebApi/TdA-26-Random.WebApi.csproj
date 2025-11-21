@@ -2,6 +2,7 @@
 
     <PropertyGroup>
         <TargetFramework>net9.0</TargetFramework>
+        <!-- Verify this path: if 'client' is at the repo root, use ../../client -->
         <SpaRoot>../client</SpaRoot>
         <SpaBuild>npm run build</SpaBuild>
         <SpaWorkingDirectory>$(SpaRoot)</SpaWorkingDirectory>
@@ -44,8 +45,10 @@
 
     <Target Name="CopySpaFiles" AfterTargets="BuildSpa">
     <ItemGroup>
+        <!-- Ensure your build output folder is 'dist'. If using Create React App, change to 'build' -->
         <SpaFiles Include="$(SpaRoot)/dist/**/*"/>
     </ItemGroup>
-    <Copy SourceFiles="@(SpaFiles)" DestinationFolder="$(OutDir)wwwroot/%(RecursiveDir)" SkipUnchangedFiles="true"/>
+    <!-- Changed DestinationFolder to 'wwwroot' so files are found during local debugging -->
+    <Copy SourceFiles="@(SpaFiles)" DestinationFolder="wwwroot/%(RecursiveDir)" SkipUnchangedFiles="true"/>
 </Target>
 </Project>
