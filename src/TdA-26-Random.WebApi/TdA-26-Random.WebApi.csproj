@@ -1,56 +1,43 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
-
-    <PropertyGroup>
-        <TargetFramework>net9.0</TargetFramework>
-        <!-- Verify this path: if 'client' is at the repo root, use ../../client -->
-        <SpaRoot>../client</SpaRoot>
-        <SpaBuild>npm run build</SpaBuild>
-        <SpaWorkingDirectory>$(SpaRoot)</SpaWorkingDirectory>
-        <Nullable>enable</Nullable>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <RootNamespace>TdA_26_Random.WebApi</RootNamespace>
-    </PropertyGroup>
-
-    <ItemGroup>
-        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.11" />
-        <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="9.0.10"/>
-        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.8"/>
-        <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="9.0.10"/>
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.10">
-            <PrivateAssets>all</PrivateAssets>
-            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-        </PackageReference>
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.10"/>
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite.Core" Version="9.0.10"/>
-        <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.10"/>
-        <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.10">
-            <PrivateAssets>all</PrivateAssets>
-            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-        </PackageReference>
-        <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="9.0.0"/>
-        <PackageReference Include="Swashbuckle.AspNetCore" Version="9.0.6"/>
-        <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="9.0.6"/>
-        <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="9.0.6"/>
-        <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="9.0.6"/>
-        <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.15.0" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <ProjectReference Include="..\TdA-26-Random.Domain\TdA-26-Random.Domain.csproj"/>
-        <ProjectReference Include="..\TdA-26-Random.Infrastructure\TdA-26-Random.Infrastructure.csproj"/>
-    </ItemGroup>
-
-    <Target Name="BuildSpa" BeforeTargets="Build">
-        <Exec WorkingDirectory="$(SpaWorkingDirectory)" Command="npm install"/>
-        <Exec WorkingDirectory="$(SpaWorkingDirectory)" Command="$(SpaBuild)"/>
-    </Target>
-
-    <Target Name="CopySpaFiles" AfterTargets="BuildSpa">
-    <ItemGroup>
-        <!-- Ensure your build output folder is 'dist'. If using Create React App, change to 'build' -->
-        <SpaFiles Include="$(SpaRoot)/dist/**/*"/>
-    </ItemGroup>
-    <!-- Changed DestinationFolder to 'wwwroot' so files are found during local debugging -->
-    <Copy SourceFiles="@(SpaFiles)" DestinationFolder="wwwroot/%(RecursiveDir)" SkipUnchangedFiles="true"/>
-</Target>
-</Project>
+        
+            <PropertyGroup>
+                <TargetFramework>net9.0</TargetFramework>
+                <!-- Cesta ke kořenovému adresáři vaší SPA -->
+                <SpaRoot>../client</SpaRoot>
+                <Nullable>enable</Nullable>
+                <ImplicitUsings>enable</ImplicitUsings>
+                <RootNamespace>TdA_26_Random.WebApi</RootNamespace>
+            </PropertyGroup>
+        
+            <ItemGroup>
+                <!-- Odebrán balíček Microsoft.AspNetCore.SpaServices.Extensions -->
+                <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.11" />
+                <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="9.0.10"/>
+                <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.8"/>
+                <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.10">
+                    <PrivateAssets>all</PrivateAssets>
+                    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+                </PackageReference>
+                <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.10"/>
+                <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite.Core" Version="9.0.10"/>
+                <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.10"/>
+                <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.10">
+                    <PrivateAssets>all</PrivateAssets>
+                    <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+                </PackageReference>
+                <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="9.0.0"/>
+                <PackageReference Include="Swashbuckle.AspNetCore" Version="9.0.6"/>
+                <PackageReference Include="Swashbuckle.AspNetCore.Swagger" Version="9.0.6"/>
+                <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="9.0.6"/>
+                <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="9.0.6"/>
+                <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="8.15.0" />
+            </ItemGroup>
+        
+            <ItemGroup>
+                <ProjectReference Include="..\TdA-26-Random.Domain\TdA-26-Random.Domain.csproj"/>
+                <ProjectReference Include="..\TdA-26-Random.Infrastructure\TdA-26-Random.Infrastructure.csproj"/>
+            </ItemGroup>
+        
+            <!-- Odebrány vlastní MSBuild cíle 'BuildSpa' a 'CopySpaFiles' -->
+        
+        </Project>

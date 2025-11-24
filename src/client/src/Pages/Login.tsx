@@ -1,10 +1,12 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import {useNavigate} from "react-router-dom";
 import axios from "axios";
 
 export default function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-
+    const navigate = useNavigate();
+    
     const login = async () => {
         const response = await axios.post('http://localhost:5196/api/auth/login', { // URI se pak musí změnit
             email, password,
@@ -13,9 +15,13 @@ export default function Login() {
         })
 
         if (response.status >= 200 && response.status < 300) {
-            console.log("User has been logged in")
+            navigate("/");
         }
     }
+
+    useEffect(() => {
+        
+    }, []);
 
     return <div className="container flex h-full items-center justify-center">
         <div
