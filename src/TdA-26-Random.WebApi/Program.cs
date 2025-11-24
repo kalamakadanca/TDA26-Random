@@ -95,4 +95,10 @@ app.MapControllers();
 
 app.MapFallbackToFile("index.html");
 
+app.MapGet("/", () =>
+{
+    var html = "<h1>Hello TdA</h1>";
+    return Results.Content(html, "text/html");
+});
+
 app.Run();
