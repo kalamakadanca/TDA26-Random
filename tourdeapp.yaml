@@ -4,7 +4,7 @@ exposedPort: 80
 
 containers:
   - name: app
-    image: registry.tourde.cloud/<slug>/app
+    image: registry.tourde.cloud/rnd-8718/app
     port: 80
 
 build:
