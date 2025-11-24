@@ -10,6 +10,6 @@ public class ApiController : ControllerBase
     [HttpGet]
     public async Task<IActionResult> GetOrganization()
     {
-        return Ok("{ \"organization\": \"Student Cyber Games\" }");
+        return new JsonResult(new { organization = "Student Cyber Games" });
     }
 }
