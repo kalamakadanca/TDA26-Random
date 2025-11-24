@@ -27,7 +27,8 @@ COPY --from=frontend-build /src/client/dist ./TdA-26-Random.WebApi/wwwroot
 RUN dotnet publish ./TdA-26-Random.WebApi/TdA-26-Random.WebApi.csproj \
     -c Release \
     -o /app/publish \
-    /p:UseAppHost=false
+    /p:UseAppHost=false \
+    /p:SkipSpaBuild=true
 
 FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS runtime
 WORKDIR /app

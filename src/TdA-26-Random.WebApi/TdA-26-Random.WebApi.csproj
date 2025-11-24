@@ -10,6 +10,10 @@
         <ImplicitUsings>enable</ImplicitUsings>
         <RootNamespace>TdA_26_Random.WebApi</RootNamespace>
     </PropertyGroup>
+    
+    <PropertyGroup>
+        <SkipSpaBuild>false</SkipSpaBuild>
+    </PropertyGroup>
 
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.11" />
@@ -40,12 +44,12 @@
         <ProjectReference Include="..\TdA-26-Random.Infrastructure\TdA-26-Random.Infrastructure.csproj"/>
     </ItemGroup>
 
-    <Target Name="BuildSpa" BeforeTargets="Build">
+    <Target Name="BuildSpa" BeforeTargets="Build" Condition="'$(SkipSpaBuild)' != 'true'">
         <Exec WorkingDirectory="$(SpaWorkingDirectory)" Command="npm install"/>
         <Exec WorkingDirectory="$(SpaWorkingDirectory)" Command="$(SpaBuild)"/>
     </Target>
 
-    <Target Name="CopySpaFiles" AfterTargets="BuildSpa">
+    <Target Name="CopySpaFiles" AfterTargets="BuildSpa" Condition="'$(SkipSpaBuild)' != 'true'">
     <ItemGroup>
         <!-- Ensure your build output folder is 'dist'. If using Create React App, change to 'build' -->
         <SpaFiles Include="$(SpaRoot)/dist/**/*"/>
