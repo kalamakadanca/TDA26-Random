@@ -40,17 +40,21 @@
         <ProjectReference Include="..\TdA-26-Random.Infrastructure\TdA-26-Random.Infrastructure.csproj"/>
     </ItemGroup>
 
+    <Target Name="CleanSpaOutput" BeforeTargets="BuildSpa">
+        <RemoveDir Directories="wwwroot" />
+    </Target>
+
     <Target Name="BuildSpa" BeforeTargets="Build">
         <Exec WorkingDirectory="$(SpaWorkingDirectory)" Command="npm install"/>
         <Exec WorkingDirectory="$(SpaWorkingDirectory)" Command="$(SpaBuild)"/>
     </Target>
 
     <Target Name="CopySpaFiles" AfterTargets="BuildSpa">
-    <ItemGroup>
-        <!-- Ensure your build output folder is 'dist'. If using Create React App, change to 'build' -->
-        <SpaFiles Include="$(SpaRoot)/dist/**/*"/>
-    </ItemGroup>
-    <!-- Changed DestinationFolder to 'wwwroot' so files are found during local debugging -->
-    <Copy SourceFiles="@(SpaFiles)" DestinationFolder="wwwroot/%(RecursiveDir)" SkipUnchangedFiles="true"/>
-</Target>
+        <ItemGroup>
+            <!-- Ensure your build output folder is 'dist'. If using Create React App, change to 'build' -->
+            <SpaFiles Include="$(SpaRoot)/dist/**/*"/>
+        </ItemGroup>
+        <!-- Changed DestinationFolder to 'wwwroot' so files are found during local debugging -->
+        <Copy SourceFiles="@(SpaFiles)" DestinationFolder="wwwroot/%(RecursiveDir)" SkipUnchangedFiles="false"/>
+    </Target>
 </Project>

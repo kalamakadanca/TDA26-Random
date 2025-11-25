@@ -20,7 +20,6 @@ builder.Services.AddDbContext<AppDbContext>(options =>
         b => b.MigrationsAssembly("TdA-26-Random.WebApi"));
 });
 
-// Konfigurace CORS
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("Development", policy =>
@@ -95,10 +94,5 @@ app.MapControllers();
 
 app.MapFallbackToFile("index.html");
 
-app.MapGet("/", () =>
-{
-    var html = "<h1>Hello TdA</h1>";
-    return Results.Content(html, "text/html");
-});
 
 app.Run();

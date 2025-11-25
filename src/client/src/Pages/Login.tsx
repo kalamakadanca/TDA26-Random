@@ -1,13 +1,15 @@
 import {useEffect, useState} from "react";
-import {useNavigate} from "react-router-dom";
+import {useNavigate, useSearchParams} from "react-router-dom";
 import axios from "axios";
+import {me} from "../Scripts/authHelper.ts";
 
 export default function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const navigate = useNavigate();
+    const [searchParams] = useSearchParams();
     
-    const login = async () => {
+    const handleLogin = async () => {
         const response = await axios.post('http://localhost:5196/api/auth/login', { // URI se pak musí změnit
             email, password,
         }, {
@@ -15,12 +17,19 @@ export default function Login() {
         })
 
         if (response.status >= 200 && response.status < 300) {
-            navigate("/");
+            const returnUrl = searchParams.get('returnUrl') || '/';
+            navigate(returnUrl);
         }
     }
 
     useEffect(() => {
+        const check = async () => {
+            if (await me()) {
+                navigate("/")
+            }
+        }
         
+        check()
     }, []);
 
     return <div className="container flex h-full items-center justify-center">
@@ -44,7 +53,7 @@ export default function Login() {
                 <div>
                     <p>Ještě nemáte účet? <a className="underline" href="/register">Vytvořit účet</a></p>
                 </div>
-                <button className="bg-blue-500 text-white rounded p-2" onClick={login}>Přihlásit se</button>
+                <button className="bg-blue-500 text-white rounded p-2" onClick={handleLogin}>Přihlásit se</button>
             </div>
         </div>
     </div>;
