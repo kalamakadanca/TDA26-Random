@@ -4,6 +4,7 @@ import Courses from "./Pages/Courses.tsx";
 import NavBar from "./Components/NavBar.tsx";
 import Login from "./Pages/Login.tsx";
 import Register from "./Pages/Register.tsx";
+import Dashboard from "./Pages/Dashboard.tsx";
 
 export default function App() {
     return <div className="w-screen h-screen items-center justify-center flex flex-col">
@@ -16,6 +17,7 @@ export default function App() {
                 <Route path="/courses" element={<Courses/>}></Route>
                 <Route path="/login" element={<Login/>}></Route>
                 <Route path="/register" element={<Register/>}></Route>
+                <Route path="/dashboard" element={<Dashboard/>}></Route>
             </Routes>
         </Router>
     </div>

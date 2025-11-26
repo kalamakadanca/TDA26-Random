@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.EntityFrameworkCore;
 using TdA_26_Random.Domain.Entities;
 using TdA_26_Random.Infrastructure.Persistance;
@@ -16,8 +17,7 @@ builder.Services.AddDbContext<IdentityDbContext>(options =>
 
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
-    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"),
-        b => b.MigrationsAssembly("TdA-26-Random.WebApi"));
+
 });
 
 builder.Services.AddCors(options =>
@@ -81,7 +81,20 @@ else
     app.UseHsts();
 }
 
-app.UseStaticFiles();
+var staticFileOptions = new StaticFileOptions
+{
+    OnPrepareResponse = ctx =>
+    {
+        // Zakáže cachování pro index.html
+        if (ctx.File.Name == "index.html")
+        {
+            ctx.Context.Response.Headers.Append("Cache-Control", "no-cache, no-store, must-revalidate");
+            ctx.Context.Response.Headers.Append("Pragma", "no-cache");
+            ctx.Context.Response.Headers.Append("Expires", "0");
+        }
+    }
+};
+app.UseStaticFiles(staticFileOptions);
 
 app.UseRouting();
 
@@ -92,7 +105,7 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.MapFallbackToFile("index.html");
+app.MapFallbackToFile("index.html", staticFileOptions);
 
 
 app.Run();

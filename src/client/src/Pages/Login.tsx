@@ -1,12 +1,11 @@
 import {useEffect, useState} from "react";
-import {useNavigate, useSearchParams} from "react-router-dom";
+import {useSearchParams} from "react-router-dom";
 import axios from "axios";
 import {me} from "../Scripts/authHelper.ts";
 
 export default function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const navigate = useNavigate();
     const [searchParams] = useSearchParams();
     
     const handleLogin = async () => {
@@ -18,14 +17,14 @@ export default function Login() {
 
         if (response.status >= 200 && response.status < 300) {
             const returnUrl = searchParams.get('returnUrl') || '/';
-            navigate(returnUrl);
+            window.location.href = returnUrl;
         }
     }
 
     useEffect(() => {
         const check = async () => {
             if (await me()) {
-                navigate("/")
+                window.location.href = "/"
             }
         }
         

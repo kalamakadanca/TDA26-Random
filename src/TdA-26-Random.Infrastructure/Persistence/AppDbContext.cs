@@ -5,7 +5,9 @@ namespace TdA_26_Random.Infrastructure.Persistance;
 
 public class AppDbContext : DbContext
 {
-    public DbSet<Course> Courses { get; set; }
+    public DbSet<Course> Courses { get; set; } 
+    
+    // TODO: Dodělat další tabulky
 
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
     {
