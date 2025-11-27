@@ -1,12 +1,7 @@
 import SideBar from "../Components/SideBar.tsx";
 import {useState} from "react";
-
-interface Course {
-    title: string,
-    description: string
-    text_content: string[]
-}
-
+import type {Course} from "../Types/Course.ts";
+import CoursePreview from "../Components/CoursePreview.tsx";
 
 function Courses() {
     const [courses, setCourses] = useState<Course[]>(() => {
@@ -23,13 +18,11 @@ function Courses() {
 
     return <div className="w-full h-full flex flex-row">
         <SideBar/>
-        
+
         <div className="container flex">
 
             {courses.map((course) => (
-                <div key={course.title}>
-                    {course.title}
-                </div>
+                <CoursePreview course={course}></CoursePreview>
             ))}
         </div>
     </div>
