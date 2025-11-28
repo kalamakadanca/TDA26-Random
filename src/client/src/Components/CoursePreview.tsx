@@ -6,10 +6,10 @@ interface Props {
 
 export default function CoursePreview({course}: Props) {
     const handleClick = async () => {
-        // TODO: window.location.href = "courses/{course.uuid}"
+        TODO: window.location.href = `courses/${course.uuid}`
     }
     return <div className="flex w-1/3 h-1/3 hover:scale-105 transition-transform ease-in-out duration-150 justify-center items-center
-        bg-blue-100 flex-col">
+        bg-blue-100 flex-col m-3 p-3 rounded-xl">
         <div className="w-full">
             <h2>{course.title}</h2>
         </div>

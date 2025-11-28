@@ -8,6 +8,7 @@ function Courses() {
         const initialCourses: Course[] = [];
         for (let i = 0; i < 5; i++) {
             initialCourses.push({
+                uuid: `${i}`, // 
                 title: `Základy programování ${i}`,
                 description: "V tomto kurzu se naučíte všechno potřebné o programování v TypeScriptu",
                 text_content: ["Toto je první odstavec je tady všechno možné!", "Toto je už dokonce druhý odstavec a jsou tatdy totální blbosti, ale potřebuji sem něco napsat na testování"]
@@ -22,7 +23,7 @@ function Courses() {
         <div className="container flex">
 
             {courses.map((course) => (
-                <CoursePreview course={course}></CoursePreview>
+                <CoursePreview key={course.uuid} course={course}></CoursePreview>
             ))}
         </div>
     </div>

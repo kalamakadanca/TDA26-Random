@@ -17,8 +17,8 @@ builder.Services.AddDbContext<IdentityDbContext>(options =>
 
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
-
-});
+    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"),
+        b => b.MigrationsAssembly("TdA-26-Random.WebApi"));});
 
 builder.Services.AddCors(options =>
 {
