@@ -6,6 +6,8 @@ import CoursePreview from "../Components/CoursePreview.tsx";
 function Courses() {
     const [courses, setCourses] = useState<Course[]>(() => {
         const initialCourses: Course[] = [];
+        setCourses([]);
+        
         for (let i = 0; i < 5; i++) {
             initialCourses.push({
                 uuid: `${i}`, // 
@@ -15,6 +17,7 @@ function Courses() {
             });
         }
         return initialCourses;
+        
     });
 
     return <div className="w-full h-full flex flex-row">

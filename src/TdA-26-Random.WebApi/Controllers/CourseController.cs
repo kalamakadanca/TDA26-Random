@@ -1,18 +1,18 @@
 ﻿using System.Text.Json.Nodes;
 using Microsoft.AspNetCore.Mvc;
+using TdA_26_Random.Application.Interfaces;
 using TdA_26_Random.Domain.Entities;
 
 namespace TdA_26_Random.WebApi.Controllers;
 
 [ApiController]
 [Route("/course")]
-public class CourseController : ControllerBase
+public class CourseController (ICourseService courseService) : ControllerBase
 {
     [HttpGet]
     public async Task<IActionResult> GetAllTasks()
     {
-        // TODO: Vrátí všechny tasky
-        return Ok();
+        return Ok(courseService.GetAllCourses());
     }
 
     [HttpPost]

@@ -36,6 +36,7 @@
     </ItemGroup>
 
     <ItemGroup>
+        <ProjectReference Include="..\TdA-26-Random.Application\TdA-26-Random.Application.csproj" />
         <ProjectReference Include="..\TdA-26-Random.Domain\TdA-26-Random.Domain.csproj"/>
         <ProjectReference Include="..\TdA-26-Random.Infrastructure\TdA-26-Random.Infrastructure.csproj"/>
     </ItemGroup>

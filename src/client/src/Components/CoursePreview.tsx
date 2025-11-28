@@ -9,7 +9,7 @@ export default function CoursePreview({course}: Props) {
         TODO: window.location.href = `courses/${course.uuid}`
     }
     return <div className="flex w-1/3 h-1/3 hover:scale-105 transition-transform ease-in-out duration-150 justify-center items-center
-        bg-blue-100 flex-col m-3 p-3 rounded-xl">
+        bg-blue-100 flex-col m-3 p-3 rounded-xl" onClick={handleClick}>
         <div className="w-full">
             <h2>{course.title}</h2>
         </div>

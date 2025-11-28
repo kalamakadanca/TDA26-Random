@@ -8,7 +8,7 @@ public class AppDbContext : DbContext
     public DbSet<Course> Courses { get; set; }
     public DbSet<Chapter> Chapters { get; set; }
 
-// TODO: Dodělat další tabulky
+// TODO: Dodělat další soubory, kvízy
 
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
     {
@@ -16,9 +16,17 @@ public class AppDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<Course>()
+            .HasKey(c => c.Uuid);
+
         modelBuilder.Entity<Chapter>()
             .HasOne<Course>()
-            .WithMany()
+            .WithMany(c => c.Chapters)
             .HasForeignKey(c => c.CourseId);
+    }
+
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        base.OnConfiguring(optionsBuilder);
     }
 }
