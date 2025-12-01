@@ -7,10 +7,9 @@ namespace TdA_26_Random.Application.Services;
 
 public class CourseService(AppDbContext context) : ICourseService
 {
-    // TODO
     public async Task<bool> CreateCourse(Course course)
     {
-        if (!string.IsNullOrEmpty(course.Title) && !string.IsNullOrEmpty(course.Description))
+        if (!string.IsNullOrEmpty(course.Title))
         {
             context.Courses.Add(course);
             await context.SaveChangesAsync();
@@ -23,11 +22,11 @@ public class CourseService(AppDbContext context) : ICourseService
 
     public async Task<IEnumerable<Course>> GetAllCourses()
     {
-        return context.Courses.Include(c => c.Chapters);
+        return await context.Courses.ToListAsync();
     }
 
     public async Task<Course> GetCourseWithUUID(string uuid)
     {
-        throw new NotImplementedException();
+        return await context.Courses.Include(c => c.Chapters).FirstOrDefaultAsync(c => c.Uuid == uuid);
     }
 }

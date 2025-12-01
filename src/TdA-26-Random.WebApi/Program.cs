@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.StaticFiles;
 using Microsoft.EntityFrameworkCore;
+using TdA_26_Random.Application.Interfaces;
+using TdA_26_Random.Application.Services;
 using TdA_26_Random.Domain.Entities;
 using TdA_26_Random.Infrastructure.Persistance;
 
@@ -8,6 +10,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddScoped<ICourseService, CourseService>();
 
 builder.Services.AddDbContext<IdentityDbContext>(options =>
 {

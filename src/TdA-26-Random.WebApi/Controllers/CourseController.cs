@@ -6,22 +6,29 @@ using TdA_26_Random.Domain.Entities;
 namespace TdA_26_Random.WebApi.Controllers;
 
 [ApiController]
-[Route("/course")]
-public class CourseController (ICourseService courseService) : ControllerBase
+[Route("/courses")]
+public class CourseController(ICourseService courseService) : ControllerBase
 {
     [HttpGet]
     public async Task<IActionResult> GetAllTasks()
     {
-        return Ok(courseService.GetAllCourses());
+        return Ok(await courseService.GetAllCourses());
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateCourse([FromBody] Course course)
+    public async Task<IActionResult> CreateCourse([FromBody] string title)
     {
-        // TODO: Vytvořit kurz
+        if (string.IsNullOrEmpty(title)) return BadRequest();
 
-        return Created();
+        Course course = new Course { Title = title};
+
+        bool created = await courseService.CreateCourse(course);
+
+        if (created)
+        {
+            return Ok(course.Uuid);
+        }
+
+        return Problem();
     }
-    
-    
 }

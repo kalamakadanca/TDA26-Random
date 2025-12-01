@@ -47,6 +47,7 @@
 
     <Target Name="BuildSpa" BeforeTargets="Build">
         <Exec WorkingDirectory="$(SpaWorkingDirectory)" Command="npm install"/>
+        <Exec WorkingDirectory="$(SpaWorkingDirectory)" Command="npm run build"/>
         <Exec WorkingDirectory="$(SpaWorkingDirectory)" Command="$(SpaBuild)"/>
     </Target>
 

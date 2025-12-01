@@ -16,13 +16,24 @@ public class AppDbContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Course>()
-            .HasKey(c => c.Uuid);
+        modelBuilder.Entity<Course>(entity =>
+        {
+            entity.HasKey(c => c.Uuid);
 
-        modelBuilder.Entity<Chapter>()
-            .HasOne<Course>()
-            .WithMany(c => c.Chapters)
-            .HasForeignKey(c => c.CourseId);
+            entity.Property(c => c.Uuid)
+                .IsRequired();
+        });
+
+
+        modelBuilder.Entity<Chapter>(entity =>
+        {
+            entity.HasKey(ch => ch.Uuid);
+            
+            entity.HasOne(ch => ch.Course)
+                .WithMany(c => c.Chapters)
+                .HasForeignKey(c => c.CourseId)
+                .OnDelete(DeleteBehavior.Cascade);
+        });
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

@@ -1,33 +1,31 @@
 import SideBar from "../Components/SideBar.tsx";
-import {useState} from "react";
 import type {Course} from "../Types/Course.ts";
-import CoursePreview from "../Components/CoursePreview.tsx";
+import {useState, useEffect} from "react";
+import axios from "axios";
 
 function Courses() {
-    const [courses, setCourses] = useState<Course[]>(() => {
-        const initialCourses: Course[] = [];
-        setCourses([]);
-        
-        for (let i = 0; i < 5; i++) {
-            initialCourses.push({
-                uuid: `${i}`, // 
-                title: `Základy programování ${i}`,
-                description: "V tomto kurzu se naučíte všechno potřebné o programování v TypeScriptu",
-                text_content: ["Toto je první odstavec je tady všechno možné!", "Toto je už dokonce druhý odstavec a jsou tatdy totální blbosti, ale potřebuji sem něco napsat na testování"]
-            });
-        }
-        return initialCourses;
-        
-    });
+    const [courses, setCourses] = useState<Course[]>([]);
+
+    useEffect(() => {
+        const getCourses = async () => {
+          const res = await axios.get("http://localhost:5196/courses");
+
+            if (res.status == 200) {
+                setCourses(res.data)
+            }
+        };
+
+        getCourses();
+    }, []);
+
 
     return <div className="w-full h-full flex flex-row">
         <SideBar/>
 
         <div className="container flex">
 
-            {courses.map((course) => (
-                <CoursePreview key={course.uuid} course={course}></CoursePreview>
-            ))}
+            {/* TODO: Vymyslet, ať se dá na řádek jenom 5 */}
+            {courses.length}
         </div>
     </div>
 }

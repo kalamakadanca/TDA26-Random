@@ -2,7 +2,8 @@
 
 public class Chapter
 {
-    public int Id { get; set; }
-    
+    public string Uuid { get; set; } = Guid.NewGuid().ToString();
+
     public string CourseId { get; set; }
+    public Course Course { get; set; }
 }
