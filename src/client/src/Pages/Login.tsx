@@ -2,13 +2,16 @@ import {useEffect, useState} from "react";
 import {useSearchParams} from "react-router-dom";
 import axios from "axios";
 import {me} from "../Scripts/authHelper.ts";
+import LoadingSpinner from "../Components/LoadingSpinner.tsx";
 
 export default function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [searchParams] = useSearchParams();
+    const [isLoading, setIsLoading] = useState<boolean>(false)
     
     const handleLogin = async () => {
+        setIsLoading(true);
         const response = await axios.post('http://localhost:5196/api/auth/login', { // URI se pak musí změnit
             email, password,
         }, {
@@ -19,6 +22,8 @@ export default function Login() {
             const returnUrl = searchParams.get('returnUrl') || '/';
             window.location.href = returnUrl;
         }
+
+        setIsLoading(false);
     }
 
     useEffect(() => {
@@ -32,6 +37,7 @@ export default function Login() {
     }, []);
 
     return <div className="container flex h-full items-center justify-center">
+        {isLoading && <LoadingSpinner/>}
         <div
             className="bg-gray-50 flex justify-center items-center flex-col p-5 shadow-xl rounded-xl w-1/3 h-fit border-gray-200"
         >

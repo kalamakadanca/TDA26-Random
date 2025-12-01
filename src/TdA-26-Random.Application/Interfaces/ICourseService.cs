@@ -6,6 +6,6 @@ public interface ICourseService
 {
     Task<bool> CreateCourse(Course course);
     Task<IEnumerable<Course>> GetAllCourses();
-    Task<Course> GetCourseWithUUID(string uuid);
+    Task<Course?> GetCourseWithUUID(string uuid);
     
 }

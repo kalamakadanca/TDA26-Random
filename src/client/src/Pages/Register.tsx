@@ -1,11 +1,15 @@
 import {useState} from "react";
 import axios from "axios";
+import LoadingSpinner from "../Components/LoadingSpinner.tsx";
 
 export default function Register() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const [isLoading, setIsLoading] = useState<boolean>(false);
+
     const register = async () => {
+        setIsLoading(true);
         const response = await axios.post('http://localhost:5196/api/auth/register', {
             email, password
         })
@@ -13,9 +17,11 @@ export default function Register() {
         if (response.status >= 200 && response.status < 300) {
             console.log("User has been logged in")
         }
+        setIsLoading(false);
     }
 
     return <div className="container flex h-full items-center justify-center w-screen ">
+        {isLoading && <LoadingSpinner/>}
         <form
             className="bg-gray-50 flex justify-center items-center flex-col p-5 shadow-xl rounded-xl w-1/3 h-fit border-gray-200"
             onSubmit={register}>

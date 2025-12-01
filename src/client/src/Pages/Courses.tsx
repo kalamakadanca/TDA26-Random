@@ -1,18 +1,29 @@
-import SideBar from "../Components/SideBar.tsx";
+import CategorySideBar from "../Components/CategorySideBar.tsx";
 import type {Course} from "../Types/Course.ts";
 import {useState, useEffect} from "react";
 import axios from "axios";
+import CoursePreview from "../Components/CoursePreview.tsx";
+import LoadingSpinner from "../Components/LoadingSpinner.tsx";
 
 function Courses() {
     const [courses, setCourses] = useState<Course[]>([]);
+    const [isLoading, setIsLoading] = useState<boolean>(false);
 
     useEffect(() => {
+        setIsLoading(true);
         const getCourses = async () => {
-          const res = await axios.get("http://localhost:5196/courses");
+            try {
+                const res = await axios.get("http://localhost:5196/api/courses");
 
-            if (res.status == 200) {
-                setCourses(res.data)
+                if (res.status == 200) {
+                    setCourses(res.data)
+                }
+            } catch (error) {
+                console.error(error)
+            } finally {
+                setIsLoading(false);
             }
+
         };
 
         getCourses();
@@ -20,12 +31,14 @@ function Courses() {
 
 
     return <div className="w-full h-full flex flex-row">
-        <SideBar/>
+        {isLoading && <LoadingSpinner/>}
+        <CategorySideBar/>
 
         <div className="container flex">
 
-            {/* TODO: Vymyslet, ať se dá na řádek jenom 5 */}
-            {courses.length}
+            {courses.map((course: Course) => (
+                <CoursePreview course={course} key={course.uuid}></CoursePreview>
+            ))}
         </div>
     </div>
 }
