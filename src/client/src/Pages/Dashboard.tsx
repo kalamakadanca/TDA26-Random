@@ -3,7 +3,6 @@ import {useNavigate} from "react-router-dom";
 import axios from "axios";
 import LoadingSpinner from "../Components/LoadingSpinner.tsx";
 import type {Course} from "../Types/Course.ts";
-import DashboardCoursePreview from "../Components/DashboardCoursePreview.tsx";
 
 export default function Dashboard() {
     const navigate = useNavigate();
@@ -36,11 +35,21 @@ export default function Dashboard() {
         check();
     }, [navigate]);
 
-    return <div className="container h-full">
+    return <div className="container h-full p-5">
         {isLoading && <LoadingSpinner/>}
-        <table className="w-full h-full flex-row">
-            <thead>
-            <tr>
+
+        <div className="flex flex-row items-center justify-between pb-5">
+            <h1 className="text-3xl">Správa úkolů</h1>
+
+            <div className="h-full flex justify-center items-center">
+                <button className="bg-blue-300 p-2 rounded">Vytvořit kurz</button>
+
+            </div>
+        </div>
+        <table className="w-full bg-blue-100 rounded shadow">
+            <thead className="bg-blue-200">
+            <tr className="p-3">
+                <th></th>
                 <th>Název</th>
                 <th>Viditelnost</th>
                 <th>Počet zapsaných</th>
@@ -50,11 +59,33 @@ export default function Dashboard() {
             <tbody>
 
             {courses?.map((course) => (
-                        <DashboardCoursePreview course={course} key={course.uuid}/>
+                <tr key={course.uuid}>
+                    <td>
+                        <div className="flex justify-center items-center">
+                            <input type="checkbox" className="scale-125"/>
+                        </div>
+                    </td>
+                    <td>
+                        <div className="flex justify-center">
+                            {course.title}
+                        </div>
+                    </td>
+                    <td>
+                        <div className="flex justify-center">
+                            {course.title}
+                        </div>
+                    </td>
+                    <td>
+                        <div className="flex justify-center">
+                            <button className="p-1 m-1 bg-red-400 rounded">Odstranit</button>
+                            {/* TODO: Nahradit ikonou */}
+                        </div>
+                    </td>
+                </tr>
             ))}
 
             </tbody>
         </table>
-
-    </div>
+        
+    </div>;
 };

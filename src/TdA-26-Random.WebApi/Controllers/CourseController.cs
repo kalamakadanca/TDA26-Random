@@ -1,4 +1,5 @@
 ﻿using System.Text.Json.Nodes;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TdA_26_Random.Application.Interfaces;
 using TdA_26_Random.Domain.Entities;
@@ -39,6 +40,12 @@ public class CourseController(ICourseService courseService) : ControllerBase
             return Ok(course.Uuid);
         }
 
+        return Problem();
+    }
+
+    [HttpDelete("{uuid}")]
+    public async Task<IActionResult> DeleteCourse(string uuid)
+    {
         return Problem();
     }
 }

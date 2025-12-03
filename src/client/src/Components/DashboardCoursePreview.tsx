@@ -5,11 +5,14 @@ interface Props {
 }
 
 export default function DashboardCoursePreview({course}: Props) {
-
+    const handleClick = () => {
+        
+    };
     return <tr>
-        <td>{course.title}</td>
-        <td>{course.uuid}</td>
-        <td>{course.description}</td>
-        <td>{course.description}</td>
+        <td className="flex justify-center">{course.title}</td>
+        <td className="flex justify-center">Veřejné</td>
+        <td className="flex justify-center">
+            <button onClick={handleClick}></button>
+        </td>
     </tr>;
 };
