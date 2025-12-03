@@ -6,9 +6,9 @@ namespace TdA_26_Random.Infrastructure.Persistance;
 public class AppDbContext : DbContext
 {
     public DbSet<Course> Courses { get; set; }
-    public DbSet<Chapter> Chapters { get; set; }
+    public DbSet<Module> Modules { get; set; }
 
-// TODO: Dodělat další soubory, kvízy
+    // TODO: Dodělat další soubory, kvízy
 
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
     {
@@ -25,12 +25,12 @@ public class AppDbContext : DbContext
         });
 
 
-        modelBuilder.Entity<Chapter>(entity =>
+        modelBuilder.Entity<Module>(entity =>
         {
-            entity.HasKey(ch => ch.Uuid);
-            
-            entity.HasOne(ch => ch.Course)
-                .WithMany(c => c.Chapters)
+            entity.HasKey(m => m.Uuid);
+
+            entity.HasOne(m => m.Course)
+                .WithMany(c => c.Modules)
                 .HasForeignKey(c => c.CourseId)
                 .OnDelete(DeleteBehavior.Cascade);
         });

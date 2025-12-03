@@ -27,6 +27,6 @@ public class CourseService(AppDbContext context) : ICourseService
 
     public async Task<Course?> GetCourseWithUUID(string uuid)
     {
-        return await context.Courses.Include(c => c.Chapters).FirstOrDefaultAsync(c => c.Uuid == uuid);
+        return await context.Courses.Include(c => c.Modules).FirstOrDefaultAsync(c => c.Uuid == uuid);
     }
 }

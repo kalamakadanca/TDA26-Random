@@ -12,7 +12,7 @@ export default function Login() {
     
     const handleLogin = async () => {
         setIsLoading(true);
-        const response = await axios.post('http://localhost:5196/api/auth/login', { // URI se pak musí změnit
+        const response = await axios.post('http://localhost:5196/api/auth/login', {
             email, password,
         }, {
             withCredentials: true

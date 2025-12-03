@@ -1,6 +1,6 @@
 ﻿namespace TdA_26_Random.Domain.Entities;
 
-public class Chapter
+public class Module
 {
     public string Uuid { get; set; } = Guid.NewGuid().ToString();
 
