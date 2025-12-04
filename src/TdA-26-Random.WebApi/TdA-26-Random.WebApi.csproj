@@ -45,13 +45,13 @@
         <RemoveDir Directories="wwwroot" />
     </Target>
 
-    <Target Name="BuildSpa" BeforeTargets="Build">
+    <Target Name="BuildSpa" BeforeTargets="Build" Condition="'$(SkipSpaBuild)' != 'true'">
         <Exec WorkingDirectory="$(SpaWorkingDirectory)" Command="npm install"/>
         <Exec WorkingDirectory="$(SpaWorkingDirectory)" Command="npm run build"/>
         <Exec WorkingDirectory="$(SpaWorkingDirectory)" Command="$(SpaBuild)"/>
     </Target>
 
-    <Target Name="CopySpaFiles" AfterTargets="BuildSpa">
+    <Target Name="CopySpaFiles" AfterTargets="BuildSpa" Condition="'$(SkipSpaBuild)' != 'true'">
         <ItemGroup>
             <!-- Ensure your build output folder is 'dist'. If using Create React App, change to 'build' -->
             <SpaFiles Include="$(SpaRoot)/dist/**/*"/>

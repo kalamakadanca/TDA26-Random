@@ -6,6 +6,7 @@ using TdA_26_Random.Domain.Entities;
 
 namespace TdA_26_Random.WebApi.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("/api/courses/")]
 public class CourseController(ICourseService courseService) : ControllerBase

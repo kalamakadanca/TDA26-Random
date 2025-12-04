@@ -3,6 +3,7 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import SearchBar from "./SearchBar.tsx";
 import {me} from "../Scripts/authHelper.ts"
+import AccountHoverMenu from "./AccountHoverMenu.tsx";
 
 function NavBar() {
     const navigate = useNavigate();
@@ -11,13 +12,14 @@ function NavBar() {
         navigate("/");
     };
 
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [isAuthenticated, setIsAuthenticated] = useState(true);
+    const [showUserMenu, setShowUserMenu] = useState<boolean>(false);
 
     useEffect(() => {
         const check = async () => {
             setIsAuthenticated(await me())
         };
-        
+
         check();
     }, []);
 
@@ -32,7 +34,8 @@ function NavBar() {
     return <div
         className={(location.pathname == "/login" || location.pathname == "/register") ? "hidden" : "w-full bg-blue-500 p-3 flex justify-between shadow items-center flex-1"}>
         <div onClick={navigateHome} className="cursor-pointer">
-            <img className="w-64" src="/Logo/SVG/Think-different-Academy_LOGO_oficialni-bile.svg"/>
+            <img className="w-64" src="/Logo/SVG/Think-different-Academy_LOGO_oficialni-bile.svg"
+                 alt="Logo Tour de App"/>
         </div>
 
         <div className={location.pathname == "/courses" ? "" : "hidden"}>
@@ -43,9 +46,11 @@ function NavBar() {
             {isAuthenticated ?
                 <div className="w-full h-full flex flex-row gap-5 justify-center items-center">
                     <button className="p-3 bg-blue-50 rounded" onClick={logout}>Odhlásit se</button>
-                    <div className="bg-blue-50 p-1 rounded-full overflow-hidden cursor-pointer">
-                        <img src='/user-icon.png' className=" size-10"/>
+                    <div className="bg-blue-50 p-1 relative rounded-full overflow-hidden cursor-pointer"
+                         onMouseEnter={() => setShowUserMenu(true)} onMouseLeave={() => setShowUserMenu(true)}>
+                        <img src='/user-icon.png' className=" size-10" alt="Ikona uživatele"/>
 
+                        {showUserMenu && <AccountHoverMenu/>}
                     </div>
                 </div>
                 :

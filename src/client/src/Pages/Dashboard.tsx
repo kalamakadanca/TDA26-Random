@@ -3,7 +3,7 @@ import {useNavigate} from "react-router-dom";
 import axios from "axios";
 import LoadingSpinner from "../Components/LoadingSpinner.tsx";
 import type {Course} from "../Types/Course.ts";
-import CreateCourseModal from "../Components/CreateCourseModal.tsx";
+import CreateCourseModal from "../Components/CourseComponents/CreateCourseModal.tsx";
 
 export default function Dashboard() {
     const navigate = useNavigate();
@@ -36,16 +36,20 @@ export default function Dashboard() {
         check();
     }, [navigate]);
 
+    const handleDelete = async () => {
+    }
+
     return <div className="container h-full p-5">
         {isLoading && <LoadingSpinner/>}
         {isModalOpen && <CreateCourseModal onClose={() => setIsModalOpen(false)}/>}
-        
+
         <div className="flex flex-row items-center justify-between pb-5">
             <h1 className="text-3xl">Správa úkolů</h1>
 
             <div className="h-full flex justify-center items-center">
-                <button className="bg-blue-300 p-2 rounded flex flex-row items-center gap-2" onClick={() => setIsModalOpen(true)}>
-                    <img className="size-5" src="/plus_ikona.svg"/> 
+                <button className="bg-blue-300 p-2 rounded flex flex-row items-center gap-2"
+                        onClick={() => setIsModalOpen(true)}>
+                    <img className="size-5" src="/plus_ikona.svg"/>
                     Nový kurz
                 </button>
 
@@ -82,7 +86,7 @@ export default function Dashboard() {
                     </td>
                     <td>
                         <div className="flex justify-center">
-                            <button className="p-1 m-1 bg-red-400 rounded">Odstranit</button>
+                            <button className="p-1 m-1 bg-red-400 rounded" onClick={handleDelete}>Odstranit</button>
                             {/* TODO: Nahradit ikonou */}
                         </div>
                     </td>

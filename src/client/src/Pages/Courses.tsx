@@ -1,8 +1,8 @@
-import CategorySideBar from "../Components/CategorySideBar.tsx";
+import CategorySideBar from "../Components/CourseComponents/CategorySideBar.tsx";
 import type {Course} from "../Types/Course.ts";
 import {useState, useEffect} from "react";
 import axios from "axios";
-import CoursePreview from "../Components/CoursePreview.tsx";
+import CoursePreview from "../Components/CourseComponents/CoursePreview.tsx";
 import LoadingSpinner from "../Components/LoadingSpinner.tsx";
 
 function Courses() {
