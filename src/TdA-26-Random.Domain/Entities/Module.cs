@@ -7,7 +7,5 @@ public class Module
     public Course Course { get; set; }
 
     public required string Title { get; set; }
-    public required string[] Text { get; set; }
-    
-    
+    public List<string>? Text { get; set; }
 }

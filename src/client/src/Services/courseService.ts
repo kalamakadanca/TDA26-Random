@@ -1,6 +1,5 @@
 ﻿import {apiClient} from "./api.config.ts";
 
-
 import type {Course} from "../Types/Course.ts";
 
 export class CourseService {
@@ -11,17 +10,19 @@ export class CourseService {
             const res = await apiClient.get<Course[]>(this.BASE_PATH);
             return res.data;
         } catch (error) {
-            throw error;
+            console.error(error);
+            return [];
         }
     }
 
     static async getCourseByUuid(uuid: string) {
         try {
-            const res = await apiClient.get<Course[]>(`${this.BASE_PATH}/${uuid}`);
+            const res = await apiClient.get<Course>(`${this.BASE_PATH}/${uuid}`);
 
             return res.data;
         } catch (error) {
-            throw error;
+            console.error(error);
+            return null;
         }
     }
 }
