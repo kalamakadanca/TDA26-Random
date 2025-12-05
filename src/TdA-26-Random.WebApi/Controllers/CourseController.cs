@@ -36,17 +36,16 @@ public class CourseController(ICourseService courseService) : ControllerBase
 
         bool created = await courseService.CreateCourse(course);
 
-        if (created)
-        {
-            return Ok(course.Uuid);
-        }
-
-        return Problem();
+        return created ? Ok(course.Uuid) : Problem();
     }
 
     [HttpDelete("{uuid}")]
     public async Task<IActionResult> DeleteCourse(string uuid)
     {
-        return Problem();
+        if(string.IsNullOrEmpty(uuid)) return BadRequest();
+
+        var res = await courseService.DeleteCourseWithUUID(uuid);
+
+        return res ? Ok() : Problem();
     }
 }

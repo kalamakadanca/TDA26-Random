@@ -10,33 +10,43 @@ export default function Dashboard() {
     const [isLoading, setIsLoading] = useState<boolean>(false);
     const [courses, setCourses] = useState<Course[] | null>(null);
     const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
-    
-    useEffect(() => {
-        const check = async () => {
-            setIsLoading(true);
-            try {
-                const res = await axios.get('http://localhost:5196/api/auth/me', {withCredentials: true});
 
-                if (res.status == 200) {
-                    const fetchCourses = await axios.get('http://localhost:5196/api/courses');
+    const fetchCourses = async () => {
+        setIsLoading(true);
+        try {
+            const res = await axios.get('http://localhost:5196/api/auth/me', {withCredentials: true});
 
-                    if (fetchCourses.status == 200) {
-                        setCourses(fetchCourses.data);
-                    }
+            if (res.status == 200) {
+                const fetchCourses = await axios.get('http://localhost:5196/api/courses');
+
+                if (fetchCourses.status == 200) {
+                    setCourses(fetchCourses.data);
                 }
-            } catch (error) {
-                console.error("Authentication check failed:", error);
-                const returnUrl = encodeURIComponent(location.pathname + location.search);
-                window.location.href = `/login?returnUrl=${returnUrl}`;
-            } finally {
-                setIsLoading(false);
             }
-        };
+        } catch (error) {
+            console.error("Authentication check failed:", error);
+            const returnUrl = encodeURIComponent(location.pathname + location.search);
+            window.location.href = `/login?returnUrl=${returnUrl}`;
+        } finally {
+            setIsLoading(false);
+        }
+    };
 
-        check();
+    useEffect(() => {
+        fetchCourses();
     }, [navigate]);
 
-    const handleDelete = async () => {
+    const handleDelete = async (uuid: string) => {
+        setIsLoading(true);
+        try {
+            await axios.delete(`http://localhost:5196/api/courses/${uuid}`);
+
+        } catch (error) {
+            console.error(error)
+        } finally {
+            setIsLoading(false);
+            fetchCourses();
+        }
     }
 
     return <div className="container h-full p-5">
@@ -86,7 +96,9 @@ export default function Dashboard() {
                     </td>
                     <td>
                         <div className="flex justify-center">
-                            <button className="p-1 m-1 bg-red-400 rounded" onClick={handleDelete}>Odstranit</button>
+                            <button className="p-1 m-1 bg-red-400 rounded"
+                                    onClick={() => handleDelete(course.uuid)}>Odstranit
+                            </button>
                             {/* TODO: Nahradit ikonou */}
                         </div>
                     </td>

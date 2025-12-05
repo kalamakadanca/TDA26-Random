@@ -3,7 +3,7 @@ import {useEffect, useState} from "react";
 import axios from "axios";
 import SearchBar from "./SearchBar.tsx";
 import {me} from "../Scripts/authHelper.ts"
-import AccountHoverMenu from "./AccountHoverMenu.tsx";
+import AccountDropdown from "./AccountDropdown.tsx";
 
 function NavBar() {
     const navigate = useNavigate();
@@ -12,7 +12,7 @@ function NavBar() {
         navigate("/");
     };
 
-    const [isAuthenticated, setIsAuthenticated] = useState(true);
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [showUserMenu, setShowUserMenu] = useState<boolean>(false);
 
     useEffect(() => {
@@ -46,11 +46,14 @@ function NavBar() {
             {isAuthenticated ?
                 <div className="w-full h-full flex flex-row gap-5 justify-center items-center">
                     <button className="p-3 bg-blue-50 rounded" onClick={logout}>Odhlásit se</button>
-                    <div className="bg-blue-50 p-1 relative rounded-full overflow-hidden cursor-pointer"
-                         onMouseEnter={() => setShowUserMenu(true)} onMouseLeave={() => setShowUserMenu(true)}>
-                        <img src='/user-icon.png' className=" size-10" alt="Ikona uživatele"/>
+                    <div className="relative" // Nový obalující div pro ikonu a dropdown
+                         onMouseEnter={() => setShowUserMenu(true)}
+                         onMouseLeave={() => setShowUserMenu(false)}>
+                        <div className="bg-blue-50 p-1 relative rounded-full cursor-pointer">
+                            <img src='/user-icon.png' className=" size-10" alt="Ikona uživatele"/>
 
-                        {showUserMenu && <AccountHoverMenu/>}
+                        </div>
+                        {showUserMenu && <AccountDropdown/>}
                     </div>
                 </div>
                 :

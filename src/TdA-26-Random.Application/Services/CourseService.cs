@@ -29,4 +29,18 @@ public class CourseService(AppDbContext context) : ICourseService
     {
         return await context.Courses.Include(c => c.Modules).FirstOrDefaultAsync(c => c.Uuid == uuid);
     }
+
+    public async Task<bool> DeleteCourseWithUUID(string uuid)
+    {
+        var course = await context.Courses.FirstOrDefaultAsync(c => c.Uuid == uuid);
+
+        if (course is not null)
+        {
+            context.Courses.Remove(course);
+            await context.SaveChangesAsync();
+            return true;
+        }
+
+        return false;
+    }
 }
