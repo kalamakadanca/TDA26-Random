@@ -66,7 +66,7 @@ export default function Dashboard() {
             </div>
         </div>
         <table className="w-full bg-blue-100 rounded shadow">
-            <thead className="bg-blue-200">
+            <thead className="bg-blue-200 rounded">
             <tr className="p-3">
                 <th></th>
                 <th>Název</th>

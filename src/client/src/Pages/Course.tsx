@@ -41,8 +41,8 @@ export default function Course() {
             <h1 className="text-3xl">Je nám líto, ale hledaný kurz nebyl nalezen</h1>
         </div>;
     } else {
-        return <div className="container flex h-full flex-col items-center">
-            <h1 className="text-2xl">{course.title}</h1>
+        return <div className="container flex h-full flex-col items-center">  
+            
         </div>;
     }
 

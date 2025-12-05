@@ -1,4 +1,8 @@
-﻿export default function AccountDropdown() {
+﻿interface Props {
+    onLogout: () => void;
+}
+
+export default function AccountDropdown({onLogout} : Props) {
     return (
         <div
             className="account-dropdown rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none"
@@ -24,7 +28,7 @@
                         Dashboard
                     </a>
                 </li>
-                <li role="none">
+                <li role="none" onClick={onLogout}>
                     <a
                         className="block px-4 py-2 text-sm text-red-600 hover:bg-red-50 hover:text-red-700 transition-colors whitespace-nowrap cursor-pointer"
                         role="menuitem"

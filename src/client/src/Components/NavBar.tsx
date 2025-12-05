@@ -45,15 +45,14 @@ function NavBar() {
         <div className="">
             {isAuthenticated ?
                 <div className="w-full h-full flex flex-row gap-5 justify-center items-center">
-                    <button className="p-3 bg-blue-50 rounded" onClick={logout}>Odhlásit se</button>
-                    <div className="relative" // Nový obalující div pro ikonu a dropdown
+                    <div className="relative"
                          onMouseEnter={() => setShowUserMenu(true)}
                          onMouseLeave={() => setShowUserMenu(false)}>
                         <div className="bg-blue-50 p-1 relative rounded-full cursor-pointer">
                             <img src='/user-icon.png' className=" size-10" alt="Ikona uživatele"/>
 
                         </div>
-                        {showUserMenu && <AccountDropdown/>}
+                        {showUserMenu && <AccountDropdown onLogout={logout}/>}
                     </div>
                 </div>
                 :
