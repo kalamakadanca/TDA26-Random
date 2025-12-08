@@ -6,6 +6,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+src/TdA-26-Random.WebApi/wwwroot/
 
 # Compiled binary addons (http://nodejs.org/api/addons.html)
 build/Release
