@@ -27,6 +27,12 @@ public class CourseController(ICourseService courseService) : ControllerBase
         return course is null ? NotFound() : Ok(course);
     }
 
+    [HttpGet("{uuid}")]
+    public async Task<IActionResult> GetModulesForCourseWithUuid(string uuid)
+    {
+        throw new NotImplementedException();
+    }
+
     [HttpPost]
     public async Task<IActionResult> CreateCourse([FromBody] string title)
     {

@@ -36,7 +36,7 @@ export default function Dashboard() {
         fetchCourses();
     }, [navigate]);
 
-    const handleDelete = async (uuid: string) => {
+    /*const handleDelete = async (uuid: string) => {
         setIsLoading(true);
         try {
             await axios.delete(`http://localhost:5196/api/courses/${uuid}`);
@@ -47,6 +47,10 @@ export default function Dashboard() {
             setIsLoading(false);
             fetchCourses();
         }
+    }
+    */
+    const handleEdit = (uuid: string) => {
+        navigate(`/courses/edit/${uuid}`);
     }
 
     return <div className="container h-full p-5">
@@ -96,8 +100,8 @@ export default function Dashboard() {
                     </td>
                     <td>
                         <div className="flex justify-center">
-                            <button className="p-1 m-1 bg-red-400 rounded"
-                                    onClick={() => handleDelete(course.uuid)}>Odstranit
+                            <button className="p-1 m-1 bg-blue-300 rounded"
+                                    onClick={() => handleEdit(course.uuid)}>Upravit
                             </button>
                             {/* TODO: Nahradit ikonou */}
                         </div>

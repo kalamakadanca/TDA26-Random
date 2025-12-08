@@ -10,9 +10,5 @@ public class Course
     public required string Title { get; set; }
     public string? Description { get; set; }
     public List<Module> Modules { get; set; }
-
-    public Course()
-    {
-        Modules.Add(new Module() {Title = "Úvod"});
-    }
+    
 }
