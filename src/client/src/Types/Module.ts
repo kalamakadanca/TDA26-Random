@@ -1,5 +1,5 @@
 export interface Module{
     uuid: string;
-    number: number;
-    
+    title: string;
+    order: number;
 }

@@ -25,9 +25,9 @@ public class CourseService(AppDbContext context) : ICourseService
         return await context.Courses.ToListAsync();
     }
 
-    public async Task<Course?> GetCourseWithUUID(string uuid)
+    public async Task<Course?> GetCourseInfoWithUuid(string uuid)
     {
-        return await context.Courses.Include(c => c.Modules).FirstOrDefaultAsync(c => c.Uuid == uuid);
+        return await context.Courses.FirstOrDefaultAsync(c => c.Uuid == uuid);
     }
 
     public async Task<bool> DeleteCourseWithUUID(string uuid)
@@ -42,5 +42,36 @@ public class CourseService(AppDbContext context) : ICourseService
         }
 
         return false;
+    }
+
+
+    public async Task<List<Module>> GetModulesForCourse(string uuid)
+    {
+        var course = await context.Courses.Include(c => c.Modules).FirstOrDefaultAsync(c => c.Uuid == uuid);
+
+        return course?.Modules ?? new List<Module>();
+    }
+
+    public async Task<bool> CreateModuleWithUuid(string courseUuid, string title, List<string> text)
+    {
+        try
+        {
+            var module = new Module() { Title = title, Text = text };
+
+            var course = await context.Courses.Include(c => c.Modules).FirstOrDefaultAsync(c => c.Uuid == courseUuid);
+
+            if (course is null) return false;
+
+            course.Modules.Add(module);
+
+            await context.SaveChangesAsync();
+
+            return true;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine($"ERROR: {e.Message}");
+            return false;
+        }
     }
 }

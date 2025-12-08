@@ -43,7 +43,6 @@ namespace TdA_26_Random.WebApi.Migrations
                         .HasColumnType("TEXT");
 
                     b.PrimitiveCollection<string>("Text")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Title")

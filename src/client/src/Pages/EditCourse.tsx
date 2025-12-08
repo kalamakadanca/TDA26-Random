@@ -35,7 +35,7 @@ export default function EditCourse() {
     } else {
         return <div className="container flex justify-center">
             <div>
-                <input type="text" value={course.title} className="text-2xl" onChange={(e) => set}/>
+                <input type="text" value={title} className="text-2xl" onChange={(e) => setTitle(e.target.value)}/>
             </div>
         </div>
     }

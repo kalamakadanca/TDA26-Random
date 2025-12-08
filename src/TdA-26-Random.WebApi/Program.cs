@@ -5,10 +5,15 @@ using TdA_26_Random.Application.Interfaces;
 using TdA_26_Random.Application.Services;
 using TdA_26_Random.Domain.Entities;
 using TdA_26_Random.Infrastructure.Persistance;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+    });
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<ICourseService, CourseService>();
@@ -22,7 +27,8 @@ builder.Services.AddDbContext<IdentityDbContext>(options =>
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"),
-        b => b.MigrationsAssembly("TdA-26-Random.WebApi"));});
+        b => b.MigrationsAssembly("TdA-26-Random.WebApi"));
+});
 
 builder.Services.AddCors(options =>
 {

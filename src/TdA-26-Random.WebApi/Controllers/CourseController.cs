@@ -1,8 +1,10 @@
 ﻿using System.Text.Json.Nodes;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using SQLitePCL;
 using TdA_26_Random.Application.Interfaces;
 using TdA_26_Random.Domain.Entities;
+using TdA_26_Random.WebApi.Models.Requests;
 
 namespace TdA_26_Random.WebApi.Controllers;
 
@@ -22,16 +24,11 @@ public class CourseController(ICourseService courseService) : ControllerBase
     {
         if (string.IsNullOrEmpty(uuid)) return BadRequest();
 
-        var course = await courseService.GetCourseWithUUID(uuid);
+        var course = await courseService.GetCourseInfoWithUuid(uuid);
 
         return course is null ? NotFound() : Ok(course);
     }
 
-    [HttpGet("{uuid}")]
-    public async Task<IActionResult> GetModulesForCourseWithUuid(string uuid)
-    {
-        throw new NotImplementedException();
-    }
 
     [HttpPost]
     public async Task<IActionResult> CreateCourse([FromBody] string title)
@@ -48,10 +45,28 @@ public class CourseController(ICourseService courseService) : ControllerBase
     [HttpDelete("{uuid}")]
     public async Task<IActionResult> DeleteCourse(string uuid)
     {
-        if(string.IsNullOrEmpty(uuid)) return BadRequest();
+        if (string.IsNullOrEmpty(uuid)) return BadRequest();
 
         var res = await courseService.DeleteCourseWithUUID(uuid);
 
         return res ? Ok() : Problem();
+    }
+
+    [HttpGet("modules/{uuid}")]
+    public async Task<IActionResult> GetModulesForCourseWithUuid(string uuid)
+    {
+        var res = await courseService.GetModulesForCourse(uuid);
+
+        return res is null
+            ? Problem("An error occured while adding module")
+            : Ok(res);
+    }
+
+    [HttpPost("modules")]
+    public async Task<IActionResult> CreateModuleForCourse(AddModuleModel model)
+    {
+        var res = await courseService.CreateModuleWithUuid(model.Uuid, model.Title, model.Text);
+
+        return res ? Ok("Module has been added") : Problem("Something went wrong while adding module");
     }
 }
