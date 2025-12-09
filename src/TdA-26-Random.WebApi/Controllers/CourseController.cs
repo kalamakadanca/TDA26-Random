@@ -24,7 +24,7 @@ public class CourseController(ICourseService courseService) : ControllerBase
     {
         if (string.IsNullOrEmpty(uuid)) return BadRequest();
 
-        var course = await courseService.GetCourseInfoWithUuid(uuid);
+        var course = await courseService.GetCourseWithUuid(uuid);
 
         return course is null ? NotFound() : Ok(course);
     }

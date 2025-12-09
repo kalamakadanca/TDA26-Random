@@ -1,5 +1,6 @@
-export interface Module{
+export interface Module {
     uuid: string;
+    courseId: string;
     title: string;
-    order: number;
+    text: string[] | null;
 }
