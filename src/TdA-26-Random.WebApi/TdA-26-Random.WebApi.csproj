@@ -53,7 +53,6 @@
 
     <Target Name="CopySpaFiles" AfterTargets="BuildSpa">
         <ItemGroup>
-            <!-- Ensure your build output folder is 'dist'. If using Create React App, change to 'build' -->
             <SpaFiles Include="$(SpaRoot)/dist/**/*"/>
         </ItemGroup>
         <!-- Changed DestinationFolder to 'wwwroot' so files are found during local debugging -->

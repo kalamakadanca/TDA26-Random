@@ -5,13 +5,14 @@ import {CourseService} from "../Services/courseService.ts";
 import ModuleSideBar from "../Components/CourseComponents/ModuleSideBar.tsx";
 import {useSearchParams} from "react-router-dom";
 
-const uuid = window.location.pathname.split("courses/")[1].split("/")[0];
+const uuid = window.location.pathname.split("courses/")[1];
+
 
 export default function Course() {
     const [course, setCourse] = useState<Course | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);
-    const [searchParams] = useSearchParams();
-    const selectedModule = searchParams.get("moduleId")
+    const [searchParams, setSearchParams] = useSearchParams();
+    const selectedModuleId = searchParams.get("module")
 
     useEffect(() => {
         const fetchCourses = async () => {
@@ -28,7 +29,14 @@ export default function Course() {
         }
 
         fetchCourses();
-    }, []);
+    }, [uuid]);
+
+    const changeModel = (uuid: string) => {
+        setSearchParams(prev => {
+            prev.set("module", uuid);
+            return prev;
+        })
+    }
 
     if (isLoading) {
         return <div className="container flex h-full flex-col items-center justify-center">
@@ -39,10 +47,20 @@ export default function Course() {
             <h1 className="text-3xl">Je nám líto, ale hledaný kurz nebyl nalezen</h1>
         </div>;
     } else {
+
+        const selectedModule = course.modules.find(module => module.uuid === selectedModuleId);
+
         return <div className="h-full w-full flex flex-row">
-            <ModuleSideBar modules={course.modules}/>
+            <ModuleSideBar modules={course.modules} onChangeModule={changeModel} selectedModuleId={selectedModuleId}/>
             <div className="container flex h-full flex-col items-center">
-                <h1>{course.title}</h1>
+                {selectedModule 
+                    ? (
+                        <div>{selectedModule.title}</div>
+                    ) :
+                    (
+                        
+                        <div>Module není načtený</div>
+                    )}
             </div>
         </div>;
     }

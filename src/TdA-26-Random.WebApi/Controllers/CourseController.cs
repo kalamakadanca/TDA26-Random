@@ -8,7 +8,6 @@ using TdA_26_Random.WebApi.Models.Requests;
 
 namespace TdA_26_Random.WebApi.Controllers;
 
-[Authorize]
 [ApiController]
 [Route("/api/courses/")]
 public class CourseController(ICourseService courseService) : ControllerBase
@@ -42,6 +41,7 @@ public class CourseController(ICourseService courseService) : ControllerBase
         return created ? Ok(course.Uuid) : Problem();
     }
 
+    [Authorize]
     [HttpDelete("{uuid}")]
     public async Task<IActionResult> DeleteCourse(string uuid)
     {
@@ -62,6 +62,7 @@ public class CourseController(ICourseService courseService) : ControllerBase
             : Ok(res);
     }
 
+    [Authorize]
     [HttpPost("modules")]
     public async Task<IActionResult> CreateModuleForCourse(AddModuleModel model)
     {
