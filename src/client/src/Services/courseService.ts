@@ -25,4 +25,10 @@ export class CourseService {
             return null;
         }
     }
+
+    static async createModule(uuid: string) {
+        try{
+            const res = await apiClient.get(`${this.BASE_PATH}/$`)
+        }
+    }
 }
