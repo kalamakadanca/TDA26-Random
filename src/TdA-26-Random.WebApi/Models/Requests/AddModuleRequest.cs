@@ -1,6 +1,6 @@
 ﻿namespace TdA_26_Random.WebApi.Models.Requests;
 
-public class AddModuleModel
+public class AddModuleRequest
 {
     public string Uuid { get; set; }
     public string Title { get; set; }

@@ -64,9 +64,9 @@ public class CourseController(ICourseService courseService) : ControllerBase
 
     [Authorize]
     [HttpPost("modules")]
-    public async Task<IActionResult> CreateModuleForCourse(AddModuleModel model)
+    public async Task<IActionResult> CreateModuleForCourse(AddModuleRequest request)
     {
-        var res = await courseService.CreateModuleWithUuid(model.Uuid, model.Title, model.Text);
+        var res = await courseService.CreateModuleWithUuid(request.Uuid, request.Title, request.Text);
 
         return res ? Ok("Module has been added") : Problem("Something went wrong while adding module");
     }

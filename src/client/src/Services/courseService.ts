@@ -25,4 +25,19 @@ export class CourseService {
             return null;
         }
     }
+
+    static async createModule(uuid: string) : Promise<string | null> {
+        try {
+            const res = await apiClient.post(`${this.BASE_PATH}/${}`);
+            
+            return res.data;
+            
+        } catch (error)
+        {
+            console.error(error);
+        }
+        finally {
+            return null;
+        }
+    }
 }
