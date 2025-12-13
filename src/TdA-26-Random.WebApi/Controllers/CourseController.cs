@@ -64,7 +64,7 @@ public class CourseController(ICourseService courseService) : ControllerBase
 
     [Authorize]
     [HttpPost("modules")]
-    public async Task<IActionResult> CreateModuleForCourse(AddModuleRequest request)
+    public async Task<IActionResult> CreateModuleForCourse([FromBody] AddModuleRequest request)
     {
         var res = await courseService.CreateModuleWithUuid(request.Uuid, request.Title, request.Text);
 

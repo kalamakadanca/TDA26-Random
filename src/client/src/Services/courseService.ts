@@ -1,6 +1,7 @@
 ﻿import {apiClient} from "./api.config.ts";
 
 import type {Course} from "../Types/Course.ts";
+import type {AddModuleRequest} from "../Models/Requests/AddModuleRequest.ts";
 
 export class CourseService {
     private static readonly BASE_PATH = "/courses";
@@ -26,9 +27,9 @@ export class CourseService {
         }
     }
 
-    static async createModule(uuid: string) : Promise<string | null> {
+    static async createModule(request: AddModuleRequest) : Promise<string | null> {
         try {
-            const res = await apiClient.post(`${this.BASE_PATH}/${}`);
+            const res = await apiClient.post(`${this.BASE_PATH}`, request);
             
             return res.data;
             
