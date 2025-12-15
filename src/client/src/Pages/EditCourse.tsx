@@ -4,6 +4,7 @@ import {CourseService} from "../Services/courseService.ts";
 import LoadingSpinner from "../Components/LoadingSpinner.tsx";
 import EditSideBar from "../Components/CourseComponents/EditSideBar.tsx";
 import {useSearchParams} from "react-router-dom";
+import type {AddModuleRequest} from "../Models/Requests/AddModuleRequest.ts";
 
 const uuid = window.location.pathname.split("edit/")[1];
 
@@ -11,9 +12,9 @@ export default function EditCourse() {
     const [isLoading, setIsLoading] = useState(false);
     const [course, setCourse] = useState<Course | null>(null);
     const [searchParams, setSearchParams] = useSearchParams();
-    const selectedModuleId = searchParams.get("module")
-    
-    
+    const selectedModuleId = searchParams.get("module");
+
+
     useEffect(() => {
         const fetchCourse = async () => {
             setIsLoading(true);
@@ -23,20 +24,36 @@ export default function EditCourse() {
 
         fetchCourse();
     }, []);
-    
+
     const changeModule = (uuid: string) => {
         setSearchParams(prev => {
             prev.set("module", uuid);
             return prev;
         })
     }
-    
+
     const deleteModule = () => {
-        
+
     }
-    
-    const createModule = () => {
+
+    const createModule = async () => {
+        const request: AddModuleRequest = {
+            uuid: uuid,
+            title: "Nový modul",
+            text: []
+        }
+
+        const res = await CourseService.createModule(request);
+
+        if (res === null || res == "") {
+            return;
+            // Throw an error
+        }
         
+        setSearchParams(prev => {
+            prev.set("module", res);
+            return prev;
+        })
     }
 
     if (isLoading) {
@@ -48,23 +65,24 @@ export default function EditCourse() {
         return <div className="container flex items-center justify-center">
             <h3>Nastala chyba! Kurz nebyl nazelezen :(</h3>
         </div>
-    } else if (selectedModuleId == null){
-        
+    } else if (selectedModuleId == null) {
+
         return <div className="w-full h-full flex flex-row">
-            <EditSideBar modules={course.modules} onChangeModule={changeModule} onCreateModule={createModule} onDeleteModule={deleteModule} selectedModuleId={selectedModuleId}></EditSideBar>
-            
+            <EditSideBar modules={course.modules} onChangeModule={changeModule} onCreateModule={createModule}
+                         onDeleteModule={deleteModule} selectedModuleId={selectedModuleId}></EditSideBar>
+
             <div className="container flex justify-center">
                 <input type="text" value={course.title}/>
-                
+
             </div>
         </div>
-    }
-    else{
+    } else {
         const selectedModule = course.modules.find(module => module.uuid === selectedModuleId);
 
         if (selectedModule != null) {
             return <div className="w-full h-full flex flex-row">
-                <EditSideBar modules={course.modules} onChangeModule={changeModule} onCreateModule={createModule} onDeleteModule={deleteModule} selectedModuleId={selectedModuleId}></EditSideBar>
+                <EditSideBar modules={course.modules} onChangeModule={changeModule} onCreateModule={createModule}
+                             onDeleteModule={deleteModule} selectedModuleId={selectedModuleId}></EditSideBar>
 
                 <div className="container flex justify-center">
                     <h3>{selectedModule.title}</h3>

@@ -52,7 +52,7 @@ public class CourseService(AppDbContext context) : ICourseService
         return course?.Modules ?? new List<Module>();
     }
 
-    public async Task<bool> CreateModuleWithUuid(string courseUuid, string title, List<string> text)
+    public async Task<string?> CreateModuleWithUuid(string courseUuid, string title, List<string> text)
     {
         try
         {
@@ -60,18 +60,18 @@ public class CourseService(AppDbContext context) : ICourseService
 
             var course = await context.Courses.Include(c => c.Modules).FirstOrDefaultAsync(c => c.Uuid == courseUuid);
 
-            if (course is null) return false;
+            if (course is null) return null;
 
             course.Modules.Add(module);
 
             await context.SaveChangesAsync();
 
-            return true;
+            return module.Uuid;
         }
         catch (Exception e)
         {
             Console.WriteLine($"ERROR: {e.Message}");
-            return false;
+            return null;
         }
     }
 }

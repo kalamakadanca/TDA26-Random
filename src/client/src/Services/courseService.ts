@@ -27,17 +27,15 @@ export class CourseService {
         }
     }
 
-    static async createModule(request: AddModuleRequest) : Promise<string | null> {
+    static async createModule(request: AddModuleRequest): Promise<string | null> {
         try {
-            const res = await apiClient.post(`${this.BASE_PATH}`, request);
-            
+            const res = await apiClient.post(`${this.BASE_PATH}/modules`, request);
+
             return res.data;
-            
-        } catch (error)
-        {
+
+        } catch (error) {
             console.error(error);
-        }
-        finally {
+        } finally {
             return null;
         }
     }

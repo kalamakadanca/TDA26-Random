@@ -9,7 +9,7 @@ public interface ICourseService
     Task<Course?> GetCourseWithUuid(string uuid);
     Task<bool> DeleteCourseWithUUID(string uuid);
     Task<List<Module>> GetModulesForCourse(string uuid);
-    Task<bool> CreateModuleWithUuid(string courseUuid, string title, List<string> text);
+    Task<string?> CreateModuleWithUuid(string courseUuid, string title, List<string> text);
     
     
 }
