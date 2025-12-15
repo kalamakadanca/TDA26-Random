@@ -68,6 +68,8 @@ public class CourseController(ICourseService courseService) : ControllerBase
     {
         var res = await courseService.CreateModuleWithUuid(request.Uuid, request.Title, request.Text);
 
-        return res ? Ok("Module has been added") : Problem("Something went wrong while adding module");
+        return res
+            ? Ok("Module has been added")
+            : Problem("Something went wrong while adding module");
     }
 }

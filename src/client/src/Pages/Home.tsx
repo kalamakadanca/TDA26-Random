@@ -7,7 +7,7 @@ function Home() {
   };
 
   return (
-    <div className="w-full bg-[#1A1A1A] h-full flex flex-col p-3 gap-5">
+    <div className="w-full h-full flex flex-col p-3 gap-5">
       <h1 className="text-[#91F5AD] flex justify-center text-5xl font-bold mb-5">
         Katalog kurzů
       </h1>
