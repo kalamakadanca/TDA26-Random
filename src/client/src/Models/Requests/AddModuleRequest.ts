@@ -1,5 +1,5 @@
 ﻿export interface AddModuleRequest {
-    uuid: string;
+    uuid: string | undefined;
     title: string;
     text: string[];
 }

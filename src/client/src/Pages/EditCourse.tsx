@@ -3,27 +3,28 @@ import type {Course} from "../Types/Course.ts";
 import {CourseService} from "../Services/courseService.ts";
 import LoadingSpinner from "../Components/LoadingSpinner.tsx";
 import EditSideBar from "../Components/CourseComponents/EditSideBar.tsx";
-import {useSearchParams} from "react-router-dom";
+import {useParams, useSearchParams} from "react-router-dom";
 import type {AddModuleRequest} from "../Models/Requests/AddModuleRequest.ts";
 
-const uuid = window.location.pathname.split("edit/")[1];
 
 export default function EditCourse() {
+    const {uuid} = useParams<{ uuid: string }>();
     const [isLoading, setIsLoading] = useState(false);
     const [course, setCourse] = useState<Course | null>(null);
     const [searchParams, setSearchParams] = useSearchParams();
     const selectedModuleId = searchParams.get("module");
-
-
+    
+    const fetchCourse = async () => {
+        setIsLoading(true);
+        setCourse(await CourseService.getCourseByUuid(uuid));
+        setIsLoading(false);
+    };
+    
     useEffect(() => {
-        const fetchCourse = async () => {
-            setIsLoading(true);
-            setCourse(await CourseService.getCourseByUuid(uuid));
-            setIsLoading(false);
-        };
+
 
         fetchCourse();
-    }, []);
+    }, [uuid]);
 
     const changeModule = (uuid: string) => {
         setSearchParams(prev => {
@@ -49,11 +50,13 @@ export default function EditCourse() {
             return;
             // Throw an error
         }
-        
+
         setSearchParams(prev => {
             prev.set("module", res);
             return prev;
         })
+        
+        await fetchCourse();
     }
 
     if (isLoading) {

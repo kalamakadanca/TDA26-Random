@@ -18,10 +18,11 @@ export default function EditSideBar({modules, selectedModuleId, onChangeModule, 
                 <li key={module.uuid}
                     className={selectedModuleId == module.uuid ? "w-full h-full flex p-3 items-center hover:bg-blue-200 bg-blue-100 rounded cursor-pointer"
                         : "w-full h-full flex p-3 items-center hover:bg-blue-200  rounded cursor-pointer"}
-                    onClick={() => onChangeModule(module.uuid)}><div>
-                    {module.title}
-                    <button onClick={() => onDeleteModule(module.uuid)}>Odstranit</button>
-                </div></li>
+                    onClick={() => onChangeModule(module.uuid)}>
+                    <div className="flex items-center justify-between w-full">
+                        {module.title}
+                    </div>
+                </li>
             ))}
             <li className="flex justify-center items-center w-full h-full">
                 <button onClick={onCreateModule}>

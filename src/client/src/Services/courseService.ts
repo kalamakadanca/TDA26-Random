@@ -16,7 +16,7 @@ export class CourseService {
         }
     }
 
-    static async getCourseByUuid(uuid: string) {
+    static async getCourseByUuid(uuid: string | undefined) {
         try {
             const res = await apiClient.get<Course>(`${this.BASE_PATH}/${uuid}`);
 
